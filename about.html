@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
-    /* Professional Redesign CSS */
+    /* Professional & Fully Responsive Redesign */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
     
     :root {
@@ -32,6 +32,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color); color: var(--font-color);
       transition: background-color 0.3s, color 0.3s; line-height: 1.7; font-size: 16px;
+      overflow-x: hidden; /* Prevents horizontal scroll */
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
     .skip-to-content {
@@ -74,23 +75,25 @@
       transition: transform 0.2s, box-shadow 0.3s;
     }
     .toggle:hover { transform: scale(1.1); box-shadow: 0 0 12px var(--primary-color); }
-    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); }
+    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); z-index: 1001; }
     .hero { text-align: center; padding: 100px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .hero h1 {
-      font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800;
+      font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem);
+      margin-bottom: 1rem; font-weight: 800;
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       letter-spacing: -1px;
     }
     section { padding: 80px 0; }
-    .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 50px; font-weight: 800; letter-spacing: -0.5px; }
-    /* About Page Specifics */
-    .about-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
+    .section-title {
+      font-size: clamp(2rem, 4vw + 1rem, 2.8rem);
+      text-align: center; margin-bottom: 50px; font-weight: 800; letter-spacing: -0.5px;
+    }
+    .about-layout { display: grid; grid-template-columns: 2fr 1fr; align-items: center; gap: 4rem; }
     .about-text p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 1.5rem; }
     .about-text b { color: var(--primary-color); font-weight: 700; }
-    .about-image { position: relative; }
     .profile-image {
-        width: 100%; max-width: 400px; display: block; margin: 0 auto;
+        width: 100%; max-width: 350px; display: block; margin: 0 auto;
         border-radius: 20px; border: 2px solid var(--border-color);
         box-shadow: 0 10px 40px var(--shadow-color);
         aspect-ratio: 1 / 1; object-fit: cover;
@@ -108,19 +111,23 @@
     .socials a:hover { color: var(--primary-color); opacity: 1; }
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Responsive Breakpoints */
+    @media (max-width: 850px) { /* Wider breakpoint for about layout */
+        .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+        .about-image { grid-row: 1; } /* Image appears first on mobile */
+    }
     @media (max-width: 768px) {
       body { font-size: 15px; }
-      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
-      .about-image { grid-row: 1; } /* Image appears first on mobile */
-      .hero h1 { font-size: 2.5rem; }
+      section { padding: 50px 0; }
       .navlinks {
         display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         flex-direction: column; background: var(--bg-color); justify-content: center;
         gap: 40px; text-align: center;
         transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       }
-      .navlinks.active { transform: translateX(0); }
-      .hamburger { display: block; z-index: 1001; }
+      .navlinks.active { display: flex; transform: translateX(0); }
+      .hamburger { display: block; }
       .footer-inner { flex-direction: column; gap: 1.5rem; }
     }
   </style>
@@ -159,7 +166,6 @@
                 </p>
             </div>
             <div class="about-image reveal">
-                <!-- The ONLY line you need to change is this one -->
                 <img src="profile.jpg" alt="A photo of Kamesh R" class="profile-image">
             </div>
         </div>
@@ -193,7 +199,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- Theme Toggler ---
       const themeToggleButton = document.querySelector('.toggle');
       const currentTheme = localStorage.getItem('theme');
       if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
@@ -203,7 +208,6 @@
         localStorage.setItem('theme', newTheme);
       });
 
-      // --- Mobile Navigation ---
       const hamburger = document.querySelector('.hamburger');
       const navlinks = document.querySelector('.navlinks');
       hamburger.addEventListener('click', () => {
@@ -213,10 +217,13 @@
         hamburger.innerHTML = isExpanded ? '&times;' : '&#9776;';
       });
       navlinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => navlinks.classList.remove('active'));
+        link.addEventListener('click', () => {
+            navlinks.classList.remove('active');
+            hamburger.innerHTML = '&#9776;';
+            hamburger.setAttribute('aria-expanded', 'false');
+        });
       });
 
-      // --- Active Nav Link ---
       const navLinks = document.querySelectorAll('.navlinks a');
       const currentPath = window.location.pathname.split('/').pop() || 'index.html';
       navLinks.forEach(link => {
@@ -224,11 +231,9 @@
         if (linkPath === currentPath) link.classList.add('active');
       });
 
-      // --- Dynamic Year in Footer ---
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // --- Staggered Scroll Reveal Animation ---
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
