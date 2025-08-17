@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AJ STUDIOS • Kamesh R | Developer Portfolio</title>
+  <link rel="icon" href="assets/logo.png">
+  <meta name="description" content="The professional portfolio of Kamesh R (AJ STUDIOS), a developer specializing in modern web applications and machine learning." />
+  
+  <!-- SEO & Social Sharing Meta Tags -->
+  <meta property="og:title" content="AJ STUDIOS • Kamesh R | Developer Portfolio" />
+  <meta property="og:description" content="Explore the projects and skills of Kamesh R, a passionate developer building elegant and functional web solutions." />
+  <meta property="og:image" content="assets/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    /* Professional Redesign CSS */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+    
+    :root {
+      --bg-color: #111111; --bg-secondary-color: #1c1c1c; --font-color: #e5e5e5;
+      --primary-color: #8A2BE2; --secondary-color: #4682B4; --card-bg-color: #181818;
+      --shadow-color: rgba(0, 0, 0, 0.4); --border-color: rgba(255, 255, 255, 0.1);
+      --nav-height: 70px;
+    }
+    [data-theme="light"] {
+      --bg-color: #f5f5f7; --bg-secondary-color: #ffffff; --font-color: #1d1d1f;
+      --primary-color: #7A28C2; --secondary-color: #007AFF; --card-bg-color: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.05); --border-color: rgba(0, 0, 0, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color); color: var(--font-color);
+      transition: background-color 0.3s, color 0.3s; line-height: 1.7; font-size: 16px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .skip-to-content {
+      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px;
+      overflow: hidden; z-index: -999;
+    }
+    .skip-to-content:focus {
+      position: fixed; top: 10px; left: 10px; background: var(--primary-color);
+      color: white; padding: 15px 25px; z-index: 2000; text-decoration: none;
+      font-weight: bold; border-radius: 8px;
+    }
+    .navbar {
+      position: sticky; top: 0; left: 0; width: 100%;
+      background: rgba(17, 17, 17, 0.8); backdrop-filter: blur(12px);
+      z-index: 1000; height: var(--nav-height); border-bottom: 1px solid var(--border-color);
+    }
+    [data-theme="light"] .navbar { background: rgba(245, 245, 247, 0.8); }
+    .navbar-inner { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+    .brand { display: flex; align-items: center; text-decoration: none; color: var(--font-color); }
+    .brand img { height: 40px; width: 40px; margin-right: 12px; object-fit: contain; border-radius: 8px; }
+    .wordmark span { font-weight: 700; font-size: 1.2rem; }
+    .wordmark small { display: block; font-size: 0.7rem; opacity: 0.6; }
+    .navlinks { display: flex; align-items: center; gap: 25px; }
+    .navlinks a {
+      color: var(--font-color); text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      padding: 8px 4px; position: relative; transition: opacity 0.3s; opacity: 0.8;
+    }
+    .navlinks a:hover { opacity: 1; }
+    .navlinks a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      transform: scaleX(0); transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .navlinks a:hover::after, .navlinks a.active::after { transform: scaleX(1); transform-origin: left; }
+    .navlinks a.active { opacity: 1; font-weight: 700; }
+    .toggle {
+      background: var(--bg-secondary-color); border: 1px solid var(--border-color); border-radius: 50px;
+      cursor: pointer; font-size: 1rem; padding: 8px; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .toggle:hover { transform: scale(1.1); box-shadow: 0 0 12px var(--primary-color); }
+    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); }
+    .hero { text-align: center; padding: 100px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .hero h1 {
+      font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -1px;
+    }
+    .lead { font-size: 1.25rem; max-width: 650px; margin-bottom: 2.5rem; opacity: 0.7; }
+    .badge { display: inline-block; padding: 8px 18px; border-radius: 50px; background: var(--card-bg-color); border: 1px solid var(--border-color); margin-bottom: 1.5rem; font-weight: 500; }
+    .cta { display: flex; gap: 1rem; }
+    .btn {
+      padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); color: white;
+      transition: transform 0.3s, box-shadow 0.3s; border: none;
+    }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 20px var(--primary-color); }
+    .btn.secondary { background: var(--card-bg-color); color: var(--font-color); border: 1px solid var(--border-color); }
+    .btn.secondary:hover { border-color: var(--primary-color); box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 15px var(--secondary-color); }
+    section { padding: 80px 0; }
+    .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 50px; font-weight: 800; letter-spacing: -0.5px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .card {
+      background: var(--card-bg-color); border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 15px var(--shadow-color); text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s; color: var(--font-color); padding: 28px;
+      border: 1px solid var(--border-color);
+    }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px var(--shadow-color); }
+    .card .thumb { font-size: 0.9rem; font-weight: 700; color: var(--primary-color); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .card h3 { margin-bottom: 8px; font-size: 1.6rem; font-weight: 700; }
+    .card p { opacity: 0.7; }
+    footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); margin-top: 60px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+    .socials a { margin: 0 12px; text-decoration: none; color: var(--font-color); font-weight: 500; transition: color 0.3s; opacity: 0.7; }
+    .socials a:hover { color: var(--primary-color); opacity: 1; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      body { font-size: 15px; }
+      .hero h1 { font-size: 2.5rem; }
+      .navlinks {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        flex-direction: column; background: var(--bg-color); justify-content: center;
+        gap: 40px; text-align: center;
+        transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .navlinks.active { transform: translateX(0); }
+      .hamburger { display: block; z-index: 1001; }
+      .footer-inner { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to Main Content</a>
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="AJ STUDIOS Logo" onerror="this.style.display='none'">
+        <div class="wordmark"><span>AJ STUDIOS</span><small>KAMESH&nbsp;R</small></div>
+      </a>
+      <div class="navlinks" id="navlinks-menu">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="toggle" aria-label="Toggle theme">☀️/🌙</button>
+      <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <header class="hero container">
+      <span class="badge reveal">👋 HELLO, WORLD! I'M KAMESH R.</span>
+      <h1 class="reveal">Crafting Digital Experiences</h1>
+      <p class="lead reveal">A passionate developer and computer science student, transforming complex problems into elegant, user-centric web solutions. Welcome to my creative corner.</p>
+      <div class="cta reveal">
+        <a href="projects.html" class="btn">Explore My Work</a>
+        <a href="contact.html" class="btn secondary">Get In Touch</a>
+      </div>
+    </header>
+
+    <section class="container">
+      <h2 class="section-title reveal">Featured Projects</h2>
+      <div class="grid">
+        <a class="card reveal" href="https://sonacgpa.vercel.app/" target="_blank" rel="noopener">
+          <div class="thumb">Education</div>
+          <h3>GPA & CGPA Calculator</h3>
+          <p>An intuitive tool for students, featuring arrear highlighting and a fully responsive interface to simplify academic tracking.</p>
+        </a>
+        <a class="card reveal" href="https://ajtracker.vercel.app/" target="_blank" rel="noopener">
+          <div class="thumb">Geolocation</div>
+          <h3>Live Location Tracker</h3>
+          <p>A real-time tracking application built with Leaflet.js and Firebase, demonstrating live data synchronization on an interactive map.</p>
+        </a>
+        <a class="card reveal" href="projects.html">
+          <div class="thumb">View All</div>
+          <h3>The Full Collection</h3>
+          <p>Browse the complete archive of my projects, experiments, and open-source contributions.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="small">© <span id="year"></span> AJ STUDIOS • Designed & Developed with ❤️ by Kamesh R</div>
+      <div class="socials">
+        <a href="https://github.com/kamesh14151" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/kamesh-aj-9723b6326" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:kamesh14151@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Theme Toggler ---
+      const themeToggleButton = document.querySelector('.toggle');
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
+      themeToggleButton.addEventListener('click', () => {
+        let newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+
+      // --- Mobile Navigation ---
+      const hamburger = document.querySelector('.hamburger');
+      const navlinks = document.querySelector('.navlinks');
+      hamburger.addEventListener('click', () => {
+        navlinks.classList.toggle('active');
+        const isExpanded = navlinks.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', isExpanded);
+        hamburger.innerHTML = isExpanded ? '&times;' : '&#9776;'; // Change icon to 'X' when open
+      });
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navlinks.classList.remove('active'));
+      });
+
+      // --- Active Nav Link ---
+      const navLinks = document.querySelectorAll('.navlinks a');
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop() || 'index.html';
+        if (linkPath === currentPath) link.classList.add('active');
+      });
+
+      // --- Dynamic Year in Footer ---
+      const yearSpan = document.getElementById('year');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+      // --- Staggered Scroll Reveal Animation ---
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      revealElements.forEach((elem, index) => {
+        elem.style.transitionDelay = `${index * 100}ms`; // Stagger delay
+        revealObserver.observe(elem);
+      });
+    });
+  </script>
+</body>
+</html>
