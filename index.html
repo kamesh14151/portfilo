@@ -6,15 +6,13 @@
   <title>AJ STUDIOS • Kamesh R | Developer Portfolio</title>
   <link rel="icon" href="assets/logo.png">
   <meta name="description" content="The professional portfolio of Kamesh R (AJ STUDIOS), a developer specializing in modern web applications and machine learning." />
-  
-  <!-- SEO & Social Sharing Meta Tags -->
   <meta property="og:title" content="AJ STUDIOS • Kamesh R | Developer Portfolio" />
   <meta property="og:description" content="Explore the projects and skills of Kamesh R, a passionate developer building elegant and functional web solutions." />
   <meta property="og:image" content="assets/social-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
-    /* Professional Redesign CSS */
+    /* Professional & Fully Responsive Redesign */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
     
     :root {
@@ -34,6 +32,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color); color: var(--font-color);
       transition: background-color 0.3s, color 0.3s; line-height: 1.7; font-size: 16px;
+      overflow-x: hidden; /* Prevents horizontal scroll */
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
     .skip-to-content {
@@ -76,17 +75,19 @@
       transition: transform 0.2s, box-shadow 0.3s;
     }
     .toggle:hover { transform: scale(1.1); box-shadow: 0 0 12px var(--primary-color); }
-    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); }
+    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); z-index: 1001; }
     .hero { text-align: center; padding: 100px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .hero h1 {
-      font-size: 3.5rem; margin-bottom: 1rem; font-weight: 800;
+      /* Fluid Typography */
+      font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem);
+      margin-bottom: 1rem; font-weight: 800;
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       letter-spacing: -1px;
     }
     .lead { font-size: 1.25rem; max-width: 650px; margin-bottom: 2.5rem; opacity: 0.7; }
     .badge { display: inline-block; padding: 8px 18px; border-radius: 50px; background: var(--card-bg-color); border: 1px solid var(--border-color); margin-bottom: 1.5rem; font-weight: 500; }
-    .cta { display: flex; gap: 1rem; }
+    .cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
     .btn {
       padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700;
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); color: white;
@@ -96,7 +97,11 @@
     .btn.secondary { background: var(--card-bg-color); color: var(--font-color); border: 1px solid var(--border-color); }
     .btn.secondary:hover { border-color: var(--primary-color); box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 15px var(--secondary-color); }
     section { padding: 80px 0; }
-    .section-title { text-align: center; font-size: 2.8rem; margin-bottom: 50px; font-weight: 800; letter-spacing: -0.5px; }
+    .section-title {
+      /* Fluid Typography */
+      font-size: clamp(2rem, 4vw + 1rem, 2.8rem);
+      text-align: center; margin-bottom: 50px; font-weight: 800; letter-spacing: -0.5px;
+    }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
     .card {
       background: var(--card-bg-color); border-radius: 16px; overflow: hidden;
@@ -114,17 +119,20 @@
     .socials a:hover { color: var(--primary-color); opacity: 1; }
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Responsive Breakpoints */
     @media (max-width: 768px) {
       body { font-size: 15px; }
-      .hero h1 { font-size: 2.5rem; }
+      .lead { font-size: 1.1rem; }
+      section { padding: 50px 0; } /* Reduced padding on mobile */
       .navlinks {
         display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         flex-direction: column; background: var(--bg-color); justify-content: center;
         gap: 40px; text-align: center;
         transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       }
-      .navlinks.active { transform: translateX(0); }
-      .hamburger { display: block; z-index: 1001; }
+      .navlinks.active { display: flex; transform: translateX(0); }
+      .hamburger { display: block; }
       .footer-inner { flex-direction: column; gap: 1.5rem; }
     }
   </style>
@@ -162,15 +170,15 @@
     <section class="container">
       <h2 class="section-title reveal">Featured Projects</h2>
       <div class="grid">
-        <a class="card reveal" href="https://sonacgpa.vercel.app/" target="_blank" rel="noopener">
+        <a class="card reveal" href="https://cgpa-calc-aj.vercel.app/" target="_blank" rel="noopener">
           <div class="thumb">Education</div>
           <h3>GPA & CGPA Calculator</h3>
-          <p>An intuitive tool for students, featuring arrear highlighting and a fully responsive interface to simplify academic tracking.</p>
+          <p>An intuitive tool for students to accurately calculate their Grade Point Averages, featuring a clean and user-friendly interface.</p>
         </a>
-        <a class="card reveal" href="https://ajtracker.vercel.app/" target="_blank" rel="noopener">
+        <a class="card reveal" href="https://cgpa-calc-location-fetch.vercel.app/" target="_blank" rel="noopener">
           <div class="thumb">Geolocation</div>
-          <h3>Live Location Tracker</h3>
-          <p>A real-time tracking application built with Leaflet.js and Firebase, demonstrating live data synchronization on an interactive map.</p>
+          <h3>Location Tracking Website</h3>
+          <p>A web application that demonstrates real-time location fetching, built to explore and implement geolocation browser APIs.</p>
         </a>
         <a class="card reveal" href="projects.html">
           <div class="thumb">View All</div>
@@ -194,7 +202,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- Theme Toggler ---
       const themeToggleButton = document.querySelector('.toggle');
       const currentTheme = localStorage.getItem('theme');
       if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
@@ -204,20 +211,22 @@
         localStorage.setItem('theme', newTheme);
       });
 
-      // --- Mobile Navigation ---
       const hamburger = document.querySelector('.hamburger');
       const navlinks = document.querySelector('.navlinks');
       hamburger.addEventListener('click', () => {
         navlinks.classList.toggle('active');
         const isExpanded = navlinks.classList.contains('active');
         hamburger.setAttribute('aria-expanded', isExpanded);
-        hamburger.innerHTML = isExpanded ? '&times;' : '&#9776;'; // Change icon to 'X' when open
+        hamburger.innerHTML = isExpanded ? '&times;' : '&#9776;';
       });
       navlinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => navlinks.classList.remove('active'));
+        link.addEventListener('click', () => {
+            navlinks.classList.remove('active');
+            hamburger.innerHTML = '&#9776;';
+            hamburger.setAttribute('aria-expanded', 'false');
+        });
       });
 
-      // --- Active Nav Link ---
       const navLinks = document.querySelectorAll('.navlinks a');
       const currentPath = window.location.pathname.split('/').pop() || 'index.html';
       navLinks.forEach(link => {
@@ -225,11 +234,9 @@
         if (linkPath === currentPath) link.classList.add('active');
       });
 
-      // --- Dynamic Year in Footer ---
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // --- Staggered Scroll Reveal Animation ---
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -241,7 +248,7 @@
       }, { threshold: 0.1 });
       
       revealElements.forEach((elem, index) => {
-        elem.style.transitionDelay = `${index * 100}ms`; // Stagger delay
+        elem.style.transitionDelay = `${index * 100}ms`;
         revealObserver.observe(elem);
       });
     });
