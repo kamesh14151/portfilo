@@ -27,7 +27,7 @@
       --shadow-color: rgba(0, 0, 0, 0.05); --border-color: rgba(0, 0, 0, 0.1);
     }
     [data-theme="light"] .navlinks {
-      background: rgba(245, 245, 247, 0.9);
+      background: rgba(245, 245, 247, 0.95);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -35,7 +35,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color); color: var(--font-color);
       transition: background-color 0.3s, color 0.3s; line-height: 1.7; font-size: 16px;
-      overflow-x: hidden; /* Prevents horizontal scroll */
+      overflow-x: hidden;
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
     .skip-to-content {
@@ -78,7 +78,7 @@
       transition: transform 0.2s, box-shadow 0.3s;
     }
     .toggle:hover { transform: scale(1.1); box-shadow: 0 0 12px var(--primary-color); }
-    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); z-index: 1001; }
+    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); }
     .hero { text-align: center; padding: 100px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .hero h1 {
       font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem);
@@ -116,34 +116,38 @@
       .lead { font-size: 1.1rem; }
       section { padding: 50px 0; }
 
-      body.nav-open {
-        overflow: hidden;
-      }
+      body.nav-open { overflow: hidden; }
       
       .navlinks {
         display: flex;
         position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         flex-direction: column;
-        background: rgba(17, 17, 17, 0.9);
+        background: rgba(17, 17, 17, 0.95);
         backdrop-filter: blur(12px);
-        justify-content: center; align-items: center;
-        gap: 40px; text-align: center;
-        z-index: 1001; /* Fix: Ensures menu is on top */
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        text-align: center;
+        z-index: 1001;
         
         opacity: 0;
-        transform: translateX(100%);
+        transform: scale(1.1);
         transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
         pointer-events: none;
       }
       .navlinks.active {
         opacity: 1;
-        transform: translateX(0);
+        transform: scale(1);
         pointer-events: auto;
       }
       .hamburger {
         display: block;
-        z-index: 1002; /* Fix: Ensures close button is on top */
+        position: relative; /* CRITICAL FIX: Ensures z-index works */
+        z-index: 1002;
       }
       .footer-inner { flex-direction: column; gap: 1.5rem; }
     }
@@ -206,7 +210,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Theme Toggler
       const themeToggleButton = document.querySelector('.toggle');
       const currentTheme = localStorage.getItem('theme');
       if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
@@ -216,7 +219,6 @@
         localStorage.setItem('theme', newTheme);
       });
 
-      // Mobile Navigation
       const hamburger = document.querySelector('.hamburger');
       const navlinks = document.querySelector('.navlinks');
       hamburger.addEventListener('click', () => {
@@ -234,7 +236,6 @@
         });
       });
 
-      // Active Nav Link Styling
       const navLinks = document.querySelectorAll('.navlinks a');
       const currentPath = window.location.pathname.split('/').pop() || 'index.html';
       navLinks.forEach(link => {
@@ -242,11 +243,9 @@
         if (linkPath === currentPath) link.classList.add('active');
       });
 
-      // Dynamic Year in Footer
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // Scroll Reveal Animation
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
