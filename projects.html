@@ -109,6 +109,11 @@
       body { font-size: 15px; }
       .lead { font-size: 1.1rem; }
       section { padding: 50px 0; }
+      
+      /* Prevents scrolling when mobile nav is open */
+      body.nav-open {
+        overflow: hidden;
+      }
       .navlinks {
         display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         flex-direction: column; background: var(--bg-color); justify-content: center;
@@ -166,6 +171,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Project Data
       const PROJECTS = [
         { category: "Education", title: "GPA & CGPA Calculator", description: "An intuitive tool for students to accurately calculate their Grade Point Averages, featuring a clean and user-friendly interface.", link: "https://cgpa-calc-aj.vercel.app/", },
         { category: "Geolocation", title: "Location Tracking Website", description: "A web application that demonstrates real-time location fetching, built to explore and implement geolocation browser APIs.", link: "https://cgpa-calc-location-fetch.vercel.app/", },
@@ -174,6 +180,7 @@
         { category: "Web Tool", title: "Age Calculator", description: "A simple yet effective utility that calculates a user's precise age based on their date of birth.", link: "https://kamesh14151.github.io/AJ-COMPANY/", }
       ];
 
+      // Dynamically create project cards
       const projectsGrid = document.getElementById('projects-grid');
       if (projectsGrid) {
         PROJECTS.forEach(project => {
@@ -187,6 +194,7 @@
         });
       }
 
+      // Theme Toggler
       const themeToggleButton = document.querySelector('.toggle');
       const currentTheme = localStorage.getItem('theme');
       if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
@@ -196,22 +204,25 @@
         localStorage.setItem('theme', newTheme);
       });
 
+      // Mobile Navigation
       const hamburger = document.querySelector('.hamburger');
       const navlinks = document.querySelector('.navlinks');
       hamburger.addEventListener('click', () => {
-        navlinks.classList.toggle('active');
-        const isExpanded = navlinks.classList.contains('active');
-        hamburger.setAttribute('aria-expanded', isExpanded);
-        hamburger.innerHTML = isExpanded ? '&times;' : '&#9776;';
+        const isActive = navlinks.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive);
+        hamburger.innerHTML = isActive ? '&times;' : '&#9776;';
+        document.body.classList.toggle('nav-open', isActive);
       });
       navlinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navlinks.classList.remove('active');
+            document.body.classList.remove('nav-open');
             hamburger.innerHTML = '&#9776;';
             hamburger.setAttribute('aria-expanded', 'false');
         });
       });
 
+      // Active Nav Link Styling
       const navLinks = document.querySelectorAll('.navlinks a');
       const currentPath = window.location.pathname.split('/').pop() || 'index.html';
       navLinks.forEach(link => {
@@ -219,9 +230,11 @@
         if (linkPath === currentPath) link.classList.add('active');
       });
 
+      // Dynamic Year in Footer
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
+      // Scroll Reveal Animation
       const revealElements = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
