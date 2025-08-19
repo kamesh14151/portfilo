@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificates • AJ STUDIOS</title>
+  <link rel="icon" href="logo.png">
+  <meta name="description" content="A showcase of certifications and professional development achievements by Kamesh R (AJ STUDIOS)." />
+  <meta property="og:title" content="Certificates • AJ STUDIOS" />
+  <meta property="og:description" content="Explore the certifications earned by Kamesh R." />
+  <meta property="og:image" content="assets/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  
+  <style>
+    /* Professional & Fully Responsive Redesign */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+    
+    :root {
+      --bg-color: #111111; --bg-secondary-color: #1c1c1c; --font-color: #e5e5e5;
+      --primary-color: #8A2BE2; --secondary-color: #4682B4; --card-bg-color: #181818;
+      --shadow-color: rgba(0, 0, 0, 0.4); --border-color: rgba(255, 255, 255, 0.1);
+      --nav-height: 70px;
+    }
+    [data-theme="light"] {
+      --bg-color: #f5f5f7; --bg-secondary-color: #ffffff; --font-color: #1d1d1f;
+      --primary-color: #7A28C2; --secondary-color: #007AFF; --card-bg-color: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.05); --border-color: rgba(0, 0, 0, 0.1);
+    }
+    [data-theme="light"] .navlinks {
+      background: rgba(245, 245, 247, 0.95);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color); color: var(--font-color);
+      transition: background-color 0.3s, color 0.3s; line-height: 1.7; font-size: 16px;
+      overflow-x: hidden;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .skip-to-content {
+      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px;
+      overflow: hidden; z-index: -999;
+    }
+    .skip-to-content:focus {
+      position: fixed; top: 10px; left: 10px; background: var(--primary-color);
+      color: white; padding: 15px 25px; z-index: 2000; text-decoration: none;
+      font-weight: bold; border-radius: 8px;
+    }
+    .navbar {
+      position: sticky; top: 0; left: 0; width: 100%;
+      background: rgba(17, 17, 17, 0.8); backdrop-filter: blur(12px);
+      z-index: 1000; height: var(--nav-height); border-bottom: 1px solid var(--border-color);
+    }
+    [data-theme="light"] .navbar { background: rgba(245, 245, 247, 0.8); }
+    .navbar-inner { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+    .brand { display: flex; align-items: center; text-decoration: none; color: var(--font-color); }
+    .brand img { height: 40px; width: 40px; margin-right: 12px; object-fit: contain; border-radius: 8px; }
+    .wordmark span { font-weight: 700; font-size: 1.2rem; }
+    .wordmark small { display: block; font-size: 0.7rem; opacity: 0.6; }
+    .navlinks { display: flex; align-items: center; gap: 25px; }
+    .navlinks a {
+      color: var(--font-color); text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      padding: 8px 4px; position: relative; transition: opacity 0.3s; opacity: 0.8;
+    }
+    .navlinks a:hover { opacity: 1; }
+    .navlinks a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      transform: scaleX(0); transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .navlinks a:hover::after, .navlinks a.active::after { transform: scaleX(1); transform-origin: left; }
+    .navlinks a.active { opacity: 1; font-weight: 700; }
+    .toggle {
+      background: var(--bg-secondary-color); border: 1px solid var(--border-color); border-radius: 50px;
+      cursor: pointer; font-size: 1rem; padding: 8px; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .toggle:hover { transform: scale(1.1); box-shadow: 0 0 12px var(--primary-color); }
+    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); }
+    .hero { text-align: center; padding: 100px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem);
+      margin-bottom: 1rem; font-weight: 800;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -1px;
+    }
+    .lead { font-size: 1.25rem; max-width: 650px; margin-bottom: 2.5rem; opacity: 0.7; }
+    section { padding: 80px 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .cert-card {
+      background: var(--card-bg-color); border-radius: 16px;
+      box-shadow: 0 4px 15px var(--shadow-color); text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s; color: var(--font-color);
+      border: 1px solid var(--border-color); overflow: hidden;
+    }
+    .cert-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px var(--shadow-color); }
+    .cert-card-img-container {
+      background-color: var(--bg-secondary-color);
+      aspect-ratio: 16 / 9;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .cert-card-img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+    .cert-card:hover .cert-card-img { transform: scale(1.05); }
+    .cert-card-content { padding: 24px; }
+    .cert-card h3 { margin-bottom: 8px; font-size: 1.4rem; font-weight: 700; }
+    .cert-card p { opacity: 0.7; margin-bottom: 1rem; }
+    .cert-card .issuer { font-weight: 500; color: var(--primary-color); }
+    footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); margin-top: 60px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+    .socials a { margin: 0 12px; text-decoration: none; color: var(--font-color); font-weight: 500; transition: color 0.3s; opacity: 0.7; }
+    .socials a:hover { color: var(--primary-color); opacity: 1; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+    @media (max-width: 768px) {
+      body { font-size: 15px; } .lead { font-size: 1.1rem; } section { padding: 50px 0; }
+      body.nav-open { overflow: hidden; }
+      .navlinks {
+        display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; flex-direction: column;
+        background: rgba(17, 17, 17, 0.95); backdrop-filter: blur(12px); justify-content: center;
+        align-items: center; gap: 40px; text-align: center; z-index: 1001; opacity: 0;
+        transform: scale(1.1); transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
+        pointer-events: none;
+      }
+      .navlinks.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+      .hamburger { display: block; position: relative; z-index: 1002; }
+      .footer-inner { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to Main Content</a>
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand">
+        <img src="logo.png" alt="AJ STUDIOS Logo" onerror="this.style.display='none'">
+        <div class="wordmark"><span>AJ STUDIOS</span><small>KAMESH&nbsp;R</small></div>
+      </a>
+      <div class="navlinks" id="navlinks-menu">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="certificates.html">Certificates</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="toggle" aria-label="Toggle theme">☀️/🌙</button>
+      <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="container hero">
+      <h1 class="reveal">My Certifications</h1>
+      <p class="lead reveal">A collection of my professional credentials, reflecting my commitment to continuous learning and skill development.</p>
+    </section>
+
+    <section class="container">
+      <div id="certs-grid" class="grid">
+        <!-- Certificates will be dynamically inserted here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="small">© <span id="year"></span> AJ STUDIOS • Designed & Developed with ❤️ by Kamesh R</div>
+      <div class="socials">
+        <a href="https://github.com/kamesh14151" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/kamesh-aj-9723b6326" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:kamesh14151@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- ADD YOUR CERTIFICATES HERE ---
+      const CERTIFICATES = [
+        {
+          image: "https://via.placeholder.com/1280x720.png?text=Certificate+Image", // Example: "assets/certs/google-it-support.jpg"
+          title: "Google IT Support Professional",
+          issuer: "Coursera & Google",
+          link: "#", // Link to your certificate validation page
+        },
+        {
+          image: "https://via.placeholder.com/1280x720.png?text=Certificate+Image", // Example: "assets/certs/js-algorithms.jpg"
+          title: "JavaScript Algorithms and Data Structures",
+          issuer: "freeCodeCamp",
+          link: "#",
+        },
+        {
+          image: "https://via.placeholder.com/1280x720.png?text=Certificate+Image", // Example: "assets/certs/python-foundations.jpg"
+          title: "Foundations of Python Programming",
+          issuer: "Udemy",
+          link: "#",
+        }
+      ];
+
+      const certsGrid = document.getElementById('certs-grid');
+      if (certsGrid) {
+        CERTIFICATES.forEach(cert => {
+          const card = document.createElement('a');
+          card.href = cert.link;
+          card.target = "_blank";
+          card.rel = "noopener";
+          card.className = "cert-card reveal";
+          card.innerHTML = `
+            <div class="cert-card-img-container">
+                <img src="${cert.image}" alt="${cert.title} Certificate" class="cert-card-img" loading="lazy">
+            </div>
+            <div class="cert-card-content">
+                <h3>${cert.title}</h3>
+                <p>Issued by <span class="issuer">${cert.issuer}</span></p>
+            </div>
+          `;
+          certsGrid.appendChild(card);
+        });
+      }
+
+      // --- ALL THE STANDARD SITE JAVASCRIPT ---
+      const themeToggleButton = document.querySelector('.toggle');
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
+      themeToggleButton.addEventListener('click', () => {
+        let newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+
+      const hamburger = document.querySelector('.hamburger');
+      const navlinks = document.querySelector('.navlinks');
+      hamburger.addEventListener('click', () => {
+        const isActive = navlinks.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive);
+        hamburger.innerHTML = isActive ? '&times;' : '&#9776;';
+        document.body.classList.toggle('nav-open', isActive);
+      });
+      navlinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navlinks.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            hamburger.innerHTML = '&#9776;';
+            hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      const navLinks = document.querySelectorAll('.navlinks a');
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop() || 'index.html';
+        if (linkPath === currentPath) link.classList.add('active');
+      });
+
+      const yearSpan = document.getElementById('year');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      revealElements.forEach((elem, index) => {
+        elem.style.transitionDelay = `${index * 100}ms`;
+        revealObserver.observe(elem);
+      });
+    });
+  </script>
+</body>
+</html>
