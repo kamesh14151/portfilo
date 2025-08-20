@@ -94,7 +94,7 @@
       background: var(--card-bg-color); border-radius: 16px;
       box-shadow: 0 4px 15px var(--shadow-color); text-decoration: none;
       transition: transform 0.3s, box-shadow 0.3s; color: var(--font-color);
-      border: 1px solid var(--border-color); overflow: hidden;
+      border: 1px solid var(--border-color); overflow: hidden; display: flex; flex-direction: column;
     }
     .cert-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px var(--shadow-color); }
     .cert-card-img-container {
@@ -108,10 +108,11 @@
         transition: transform 0.4s ease;
     }
     .cert-card:hover .cert-card-img { transform: scale(1.05); }
-    .cert-card-content { padding: 24px; }
+    .cert-card-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
     .cert-card h3 { margin-bottom: 8px; font-size: 1.4rem; font-weight: 700; }
     .cert-card p { opacity: 0.7; margin-bottom: 1rem; }
     .cert-card .issuer { font-weight: 500; color: var(--primary-color); }
+    .cert-card .cert-date { font-size: 0.85rem; opacity: 0.6; margin-top: auto; }
     footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); margin-top: 60px; }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; }
     .socials a { margin: 0 12px; text-decoration: none; color: var(--font-color); font-weight: 500; transition: color 0.3s; opacity: 0.7; }
@@ -146,7 +147,7 @@
       <div class="navlinks" id="navlinks-menu">
         <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
-        <a href="certificates.html">Certificates</a>
+        <a href="certificates.html" class="active">Certificates</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -163,7 +164,7 @@
 
     <section class="container">
       <div id="certs-grid" class="grid">
-        <!-- Certificates will be dynamically inserted here -->
+        <!-- Certificates will be dynamically inserted here by the script below -->
       </div>
     </section>
   </main>
@@ -181,25 +182,40 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- ADD YOUR CERTIFICATES HERE ---
+      // --- MANAGE YOUR CERTIFICATES HERE ---
+      // Instructions:
+      // 1. Save your certificate images in a folder, for example, named "assets".
+      // 2. For each certificate, add a new object {} to the CERTIFICATES array.
+      // 3. Fill in the details: title, issuer, date, and the image path.
+      // 4. The 'link' should be the same as the 'image' path to open the image when clicked.
       const CERTIFICATES = [
         {
-          image: "https://via.placeholder.com/1280x720.png?text=Certificate+Image", // Example: "assets/certs/google-it-support.jpg"
-          title: "Google IT Support Professional",
-          issuer: "Coursera & Google",
-          link: "#", // Link to your certificate validation page
+          title: "Basics of Python",
+          issuer: "Infosys Springboard",
+          date: "Issued on August 15, 2025",
+          image: "assets/infosys-python.jpg", // <-- IMPORTANT: Make sure this path is correct
+          link: "assets/infosys-python.jpg",   // <-- Link to the image file
         },
         {
-          image: "https://via.placeholder.com/1280x720.png?text=Certificate+Image", // Example: "assets/certs/js-algorithms.jpg"
-          title: "JavaScript Algorithms and Data Structures",
-          issuer: "freeCodeCamp",
-          link: "#",
+          title: "Circular Economy",
+          issuer: "HP LIFE",
+          date: "Issued on August 20, 2025",
+          image: "assets/hp-circular-economy.jpg", // <-- IMPORTANT: Make sure this path is correct
+          link: "assets/hp-circular-economy.jpg",
         },
         {
-          image: "https://via.placeholder.com/1280x720.png?text=Certificate+Image", // Example: "assets/certs/python-foundations.jpg"
-          title: "Foundations of Python Programming",
-          issuer: "Udemy",
-          link: "#",
+          title: "Phishing Attacks",
+          issuer: "VOIS (Vodafone Idea Foundation)",
+          date: "Issued on July 17, 2025",
+          image: "assets/vois-phishing.jpg", // <-- IMPORTANT: Make sure this path is correct
+          link: "assets/vois-phishing.jpg",
+        },
+        {
+          title: "Student Member",
+          issuer: "The Indian Society for Technical Education (ISTE)",
+          date: "Duration: 2025 - 2029",
+          image: "assets/iste-membership.jpg", // <-- IMPORTANT: Make sure this path is correct
+          link: "assets/iste-membership.jpg",
         }
       ];
 
@@ -213,18 +229,19 @@
           card.className = "cert-card reveal";
           card.innerHTML = `
             <div class="cert-card-img-container">
-                <img src="${cert.image}" alt="${cert.title} Certificate" class="cert-card-img" loading="lazy">
+                <img src="${cert.image}" alt="${cert.title} Certificate from ${cert.issuer}" class="cert-card-img" loading="lazy">
             </div>
             <div class="cert-card-content">
                 <h3>${cert.title}</h3>
                 <p>Issued by <span class="issuer">${cert.issuer}</span></p>
+                <p class="cert-date">${cert.date}</p>
             </div>
           `;
           certsGrid.appendChild(card);
         });
       }
 
-      // --- ALL THE STANDARD SITE JAVASCRIPT ---
+      // --- THEME TOGGLE, MOBILE NAVIGATION, AND ANIMATIONS ---
       const themeToggleButton = document.querySelector('.toggle');
       const currentTheme = localStorage.getItem('theme');
       if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
@@ -254,9 +271,15 @@
       const navLinks = document.querySelectorAll('.navlinks a');
       const currentPath = window.location.pathname.split('/').pop() || 'index.html';
       navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href').split('/').pop() || 'index.html';
-        if (linkPath === currentPath) link.classList.add('active');
+          const linkPath = link.getAttribute('href').split('/').pop() || 'index.html';
+          // Make sure to match certificates.html or the current file name
+          if (link.getAttribute('href') === 'certificates.html' && (currentPath === 'certificates.html' || currentPath === '')) {
+              link.classList.add('active');
+          } else if (linkPath === currentPath) {
+              link.classList.add('active');
+          }
       });
+      
 
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
