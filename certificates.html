@@ -12,23 +12,21 @@
   <meta name="twitter:card" content="summary_large_image" />
   
   <style>
-    /* Professional & Fully Responsive Redesign */
+    /* Professional & Fully Responsive Redesign with UI/UX Enhancements */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
     
     :root {
       --bg-color: #111111; --bg-secondary-color: #1c1c1c; --font-color: #e5e5e5;
-      --primary-color: #8A2BE2; --secondary-color: #4682B4; --card-bg-color: #181818;
+      --primary-color: #8A2BE2; --secondary-color: #4682B4; --card-bg-color: rgba(24, 24, 24, 0.6);
       --shadow-color: rgba(0, 0, 0, 0.4); --border-color: rgba(255, 255, 255, 0.1);
-      --nav-height: 70px;
+      --nav-height: 70px; --glow-color: rgba(138, 43, 226, 0.5);
     }
     [data-theme="light"] {
       --bg-color: #f5f5f7; --bg-secondary-color: #ffffff; --font-color: #1d1d1f;
-      --primary-color: #7A28C2; --secondary-color: #007AFF; --card-bg-color: #ffffff;
-      --shadow-color: rgba(0, 0, 0, 0.05); --border-color: rgba(0, 0, 0, 0.1);
+      --primary-color: #7A28C2; --secondary-color: #007AFF; --card-bg-color: rgba(255, 255, 255, 0.6);
+      --shadow-color: rgba(0, 0, 0, 0.08); --border-color: rgba(0, 0, 0, 0.1); --glow-color: rgba(122, 40, 194, 0.4);
     }
-    [data-theme="light"] .navlinks {
-      background: rgba(245, 245, 247, 0.95);
-    }
+    
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -38,21 +36,15 @@
       overflow-x: hidden;
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-    .skip-to-content {
-      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px;
-      overflow: hidden; z-index: -999;
-    }
-    .skip-to-content:focus {
-      position: fixed; top: 10px; left: 10px; background: var(--primary-color);
-      color: white; padding: 15px 25px; z-index: 2000; text-decoration: none;
-      font-weight: bold; border-radius: 8px;
-    }
+    
+    /* --- NAVBAR --- */
     .navbar {
       position: sticky; top: 0; left: 0; width: 100%;
-      background: rgba(17, 17, 17, 0.8); backdrop-filter: blur(12px);
+      background: rgba(17, 17, 17, 0.7); /* Glassmorphism effect */
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       z-index: 1000; height: var(--nav-height); border-bottom: 1px solid var(--border-color);
     }
-    [data-theme="light"] .navbar { background: rgba(245, 245, 247, 0.8); }
+    [data-theme="light"] .navbar { background: rgba(245, 245, 247, 0.7); }
     .navbar-inner { display: flex; justify-content: space-between; align-items: center; height: 100%; }
     .brand { display: flex; align-items: center; text-decoration: none; color: var(--font-color); }
     .brand img { height: 40px; width: 40px; margin-right: 12px; object-fit: contain; border-radius: 8px; }
@@ -79,15 +71,18 @@
     }
     .toggle:hover { transform: scale(1.1); box-shadow: 0 0 12px var(--primary-color); }
     .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); }
-    .hero { text-align: center; padding: 100px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+    /* --- HERO SECTION --- */
+    .hero { text-align: center; padding: 100px 20px; }
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem);
-      margin-bottom: 1rem; font-weight: 800;
+      font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem); margin-bottom: 1rem; font-weight: 800;
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       letter-spacing: -1px;
     }
     .lead { font-size: 1.25rem; max-width: 650px; margin-bottom: 2.5rem; opacity: 0.7; }
+    
+    /* --- CERTIFICATE GRID & CARDS --- */
     section { padding: 80px 0; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
     .cert-card {
@@ -95,13 +90,15 @@
       box-shadow: 0 4px 15px var(--shadow-color); text-decoration: none;
       transition: transform 0.3s, box-shadow 0.3s; color: var(--font-color);
       border: 1px solid var(--border-color); overflow: hidden; display: flex; flex-direction: column;
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
     }
-    .cert-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px var(--shadow-color); }
+    .cert-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px var(--glow-color), 0 10px 20px var(--shadow-color);
+    }
     .cert-card-img-container {
-      background-color: var(--bg-secondary-color);
-      aspect-ratio: 16 / 9;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+      background-color: var(--bg-secondary-color); aspect-ratio: 16 / 9;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
     .cert-card-img {
         width: 100%; height: 100%; object-fit: cover;
@@ -109,14 +106,54 @@
     }
     .cert-card:hover .cert-card-img { transform: scale(1.05); }
     .cert-card-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
-    .cert-card h3 { margin-bottom: 8px; font-size: 1.4rem; font-weight: 700; }
-    .cert-card p { opacity: 0.7; margin-bottom: 1rem; }
+    .cert-card h3 { margin-bottom: 8px; font-size: 1.4rem; font-weight: 700; line-height: 1.3; }
+    .cert-card p { opacity: 0.8; margin-bottom: 1rem; }
     .cert-card .issuer { font-weight: 500; color: var(--primary-color); }
-    .cert-card .cert-date { font-size: 0.85rem; opacity: 0.6; margin-top: auto; }
+    .cert-card .cert-date { font-size: 0.85rem; opacity: 0.6; margin-top: 1rem; }
+    .cert-card-footer { margin-top: auto; padding-top: 1.5rem; }
+    .view-cert-btn {
+      display: inline-block; width: 100%; text-align: center;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white; border: none; padding: 12px 20px; border-radius: 8px;
+      font-weight: 700; text-decoration: none; cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .view-cert-btn:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+
+    /* --- FOOTER --- */
     footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); margin-top: 60px; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
-    .socials a { margin: 0 12px; text-decoration: none; color: var(--font-color); font-weight: 500; transition: color 0.3s; opacity: 0.7; }
-    .socials a:hover { color: var(--primary-color); opacity: 1; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .socials { display: flex; gap: 1rem; align-items: center; }
+    .socials a {
+        text-decoration: none; color: var(--font-color); font-size: 1.5rem;
+        transition: color 0.3s, transform 0.3s; opacity: 0.7;
+    }
+    .socials a:hover { color: var(--primary-color); opacity: 1; transform: scale(1.2); }
+
+    /* --- MODAL (POP-UP) STYLES --- */
+    .modal {
+        position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+    }
+    .modal.active { opacity: 1; visibility: visible; }
+    .modal-content {
+        position: relative; max-width: 90%; max-height: 90%;
+        transform: scale(0.9); transition: transform 0.3s;
+    }
+    .modal.active .modal-content { transform: scale(1); }
+    .modal-img {
+        width: auto; height: auto; max-width: 100%; max-height: 100%;
+        object-fit: contain; border-radius: 8px;
+    }
+    .modal-close {
+        position: absolute; top: -40px; right: -20px;
+        color: #fff; font-size: 2.5rem; font-weight: bold;
+        cursor: pointer; background: none; border: none;
+    }
+
+    /* --- UTILITIES & RESPONSIVE DESIGN --- */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     
@@ -125,7 +162,7 @@
       body.nav-open { overflow: hidden; }
       .navlinks {
         display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; flex-direction: column;
-        background: rgba(17, 17, 17, 0.95); backdrop-filter: blur(12px); justify-content: center;
+        background: rgba(17, 17, 17, 0.98); backdrop-filter: blur(12px); justify-content: center;
         align-items: center; gap: 40px; text-align: center; z-index: 1001; opacity: 0;
         transform: scale(1.1); transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
         pointer-events: none;
@@ -133,11 +170,12 @@
       .navlinks.active { opacity: 1; transform: scale(1); pointer-events: auto; }
       .hamburger { display: block; position: relative; z-index: 1002; }
       .footer-inner { flex-direction: column; gap: 1.5rem; }
+      .modal-close { top: 10px; right: 20px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; font-size: 1.5rem; display: flex; align-items: center; justify-content: center;}
     }
   </style>
 </head>
 <body>
-  <a href="#main-content" class="skip-to-content">Skip to Main Content</a>
+  
   <nav class="navbar">
     <div class="container navbar-inner">
       <a href="index.html" class="brand">
@@ -173,75 +211,106 @@
     <div class="container footer-inner">
       <div class="small">© <span id="year"></span> AJ STUDIOS • Designed & Developed with ❤️ by Kamesh R</div>
       <div class="socials">
-        <a href="https://github.com/kamesh14151" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/kamesh-aj-9723b6326" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:kamesh14151@gmail.com">Email</a>
+        <!-- Social Icons Added Here -->
+        <a href="https://github.com/kamesh14151" target="_blank" rel="noopener" aria-label="GitHub Profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/kamesh-aj-9723b6326" target="_blank" rel="noopener" aria-label="LinkedIn Profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="mailto:kamesh14151@gmail.com" aria-label="Send an Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+        </a>
       </div>
     </div>
   </footer>
 
+  <!-- MODAL (POP-UP) HTML STRUCTURE -->
+  <div class="modal" id="cert-modal">
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+        <img src="" alt="Certificate Preview" class="modal-img" id="modal-img">
+    </div>
+  </div>
+
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // --- MANAGE YOUR CERTIFICATES HERE ---
-      // Instructions:
-      // 1. Save your certificate images in a folder, for example, named "assets".
-      // 2. For each certificate, add a new object {} to the CERTIFICATES array.
-      // 3. Fill in the details: title, issuer, date, and the image path.
-      // 4. The 'link' should be the same as the 'image' path to open the image when clicked.
       const CERTIFICATES = [
         {
           title: "Basics of Python",
           issuer: "Infosys Springboard",
           date: "Issued on August 15, 2025",
-          image: "infosys-python.jpg", // <-- IMPORTANT: Make sure this path is correct
-          link: "infosys-python.jpg",   // <-- Link to the image file
+          image: "infosys-python.jpg",
         },
         {
           title: "Circular Economy",
           issuer: "HP LIFE",
           date: "Issued on August 20, 2025",
-          image: "hp-circular-economy.jpg", // <-- IMPORTANT: Make sure this path is correct
-          link: "hp-circular-economy.jpg",
+          image: "hp-circular-economy.jpg",
         },
         {
           title: "Phishing Attacks",
           issuer: "VOIS (Vodafone Idea Foundation)",
           date: "Issued on July 17, 2025",
-          image: "vois-phishing.jpg", // <-- IMPORTANT: Make sure this path is correct
-          link: "vois-phishing.jpg",
+          image: "vois-phishing.jpg",
         },
         {
           title: "Student Member",
           issuer: "The Indian Society for Technical Education (ISTE)",
           date: "Duration: 2025 - 2029",
-          image: "iste-membership.jpg", // <-- IMPORTANT: Make sure this path is correct
-          link: "iste-membership.jpg",
+          image: "iste-membership.jpg",
         }
       ];
 
       const certsGrid = document.getElementById('certs-grid');
+      const modal = document.getElementById('cert-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+
       if (certsGrid) {
         CERTIFICATES.forEach(cert => {
-          const card = document.createElement('a');
-          card.href = cert.link;
-          card.target = "_blank";
-          card.rel = "noopener";
+          const card = document.createElement('div');
           card.className = "cert-card reveal";
           card.innerHTML = `
             <div class="cert-card-img-container">
-                <img src="${cert.image}" alt="${cert.title} Certificate from ${cert.issuer}" class="cert-card-img" loading="lazy">
+                <img src="${cert.image}" alt="${cert.title} Certificate Thumbnail" class="cert-card-img" loading="lazy">
             </div>
             <div class="cert-card-content">
                 <h3>${cert.title}</h3>
                 <p>Issued by <span class="issuer">${cert.issuer}</span></p>
-                <p class="cert-date">${cert.date}</p>
+                <div class="cert-card-footer">
+                    <p class="cert-date">${cert.date}</p>
+                    <button class="view-cert-btn" data-img-src="${cert.image}">View Certificate</button>
+                </div>
             </div>
           `;
           certsGrid.appendChild(card);
         });
       }
 
-      // --- THEME TOGGLE, MOBILE NAVIGATION, AND ANIMATIONS ---
+      // --- MODAL (POP-UP) LOGIC ---
+      certsGrid.addEventListener('click', function(e) {
+          if (e.target.classList.contains('view-cert-btn')) {
+              const imgSrc = e.target.getAttribute('data-img-src');
+              modalImg.src = imgSrc;
+              modal.classList.add('active');
+          }
+      });
+
+      const closeModal = () => {
+          modal.classList.remove('active');
+      };
+
+      modalCloseBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+          if (e.target === modal) { // Close if clicked on background
+              closeModal();
+          }
+      });
+
+      // --- THEME TOGGLE, MOBILE NAV, AND ANIMATIONS ---
       const themeToggleButton = document.querySelector('.toggle');
       const currentTheme = localStorage.getItem('theme');
       if (currentTheme) document.documentElement.setAttribute('data-theme', currentTheme);
@@ -272,15 +341,13 @@
       const currentPath = window.location.pathname.split('/').pop() || 'index.html';
       navLinks.forEach(link => {
           const linkPath = link.getAttribute('href').split('/').pop() || 'index.html';
-          // Make sure to match certificates.html or the current file name
-          if (link.getAttribute('href') === 'certificates.html' && (currentPath === 'certificates.html' || currentPath === '')) {
-              link.classList.add('active');
+          if (link.getAttribute('href') === 'certificates.html' || currentPath === 'certificates.html') {
+              if (link.getAttribute('href') === 'certificates.html') link.classList.add('active');
           } else if (linkPath === currentPath) {
               link.classList.add('active');
           }
       });
       
-
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
