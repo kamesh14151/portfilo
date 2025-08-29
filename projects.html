@@ -174,6 +174,8 @@
       display: flex; 
       align-items: center; 
       gap: 1rem; 
+      position: relative;
+      z-index: 1003; /* Ensure it's above the mobile menu */
     }
     
     .navlinks { 
@@ -768,10 +770,6 @@
         display: block; 
       }
       
-      .toggle { 
-        display: none; 
-      }
-      
       .footer-inner {
         flex-direction: column;
         text-align: center;
@@ -1021,12 +1019,9 @@
       // DOM ELEMENTS
       const projectsGrid = document.getElementById('projects-grid');
       const themeToggleButton = document.getElementById('theme-toggle');
-      const hamburger = document.querySelector('.hamburger');
-      const navlinks = document.querySelector('.navlinks');
-      const hamburgerIcon = hamburger.querySelector('i');
-      const navlinkItems = navlinks.querySelectorAll('a');
+      const hamburger = document.getElementById('hamburger');
+      const navlinks = document.getElementById('navlinks-menu');
       const yearSpan = document.getElementById('year');
-      const revealElements = document.querySelectorAll('.reveal');
       const navbar = document.getElementById('navbar');
       const backToTopBtn = document.getElementById('back-to-top');
       const searchInput = document.getElementById('search-input');
@@ -1129,7 +1124,8 @@
         themeToggleButton.textContent = theme === 'dark' ? '☀️' : '🌙';
       }
       
-      themeToggleButton.addEventListener('click', () => {
+      themeToggleButton.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
         const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
@@ -1140,12 +1136,16 @@
       });
       
       // HAMBURGER MENU
-      hamburger.addEventListener('click', () => {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
         const isActive = navlinks.classList.toggle('active');
         hamburger.setAttribute('aria-expanded', isActive);
         document.body.classList.toggle('nav-open', isActive);
+        
+        const hamburgerIcon = hamburger.querySelector('i');
         hamburgerIcon.className = isActive ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
         
+        const navlinkItems = navlinks.querySelectorAll('a');
         navlinkItems.forEach((link, index) => {
           if (isActive) {
             link.style.transition = `opacity 0.3s ease ${index * 0.1}s, transform 0.3s ease ${index * 0.1}s`;
@@ -1160,13 +1160,13 @@
       });
       
       // CLOSE MOBILE MENU WHEN LINK IS CLICKED
-      navlinkItems.forEach(link => {
+      navlinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
           if (navlinks.classList.contains('active')) {
             navlinks.classList.remove('active');
             hamburger.setAttribute('aria-expanded', false);
             document.body.classList.remove('nav-open');
-            hamburgerIcon.className = 'fa-solid fa-bars';
+            hamburger.querySelector('i').className = 'fa-solid fa-bars';
           }
         });
       });
