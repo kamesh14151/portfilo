@@ -375,20 +375,25 @@ body.nav-open {
       </div>
       <div class="nav-controls">
           <button class="toggle" aria-label="Toggle theme">☀️/🌙</button>
-          <button class="hamburger hamburger-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-mobile">
-              <i class="fa-solid fa-bars"></i>
-          </button>
-      </div>
-    </div>
-  </nav>
+          <!-- Hamburger Menu Button -->
+<button class="hamburger hamburger-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-mobile">
+  <i class="fa-solid fa-bars"></i>
+</button>   
+
+<!-- Mobile Navigation Menu -->
+<div class="navlinks-mobile" id="navlinks-mobile">
+  <!-- Close Button -->
+  <button class="close-btn" aria-label="Close navigation menu">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
   
-  <div class="navlinks-mobile" id="navlinks-mobile">
-      <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
-      <a href="projects.html"><i class="fa-solid fa-layer-group"></i>Projects</a>
-      <a href="certificates.html"><i class="fa-solid fa-certificate"></i>Certificates</a>
-      <a href="about.html"><i class="fa-solid fa-user"></i>About</a>
-      <a href="contact.html"><i class="fa-solid fa-envelope"></i>Contact</a>
-  </div>
+  <!-- Navigation Links -->
+  <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
+  <a href="projects.html"><i class="fa-solid fa-layer-group"></i>Projects</a>
+  <a href="certificates.html"><i class="fa-solid fa-certificate"></i>Certificates</a>
+  <a href="about.html"><i class="fa-solid fa-user"></i>About</a>
+  <a href="contact.html"><i class="fa-solid fa-envelope"></i>Contact</a>
+</div>
   
   <main id="main-content">
     <header class="hero container">
