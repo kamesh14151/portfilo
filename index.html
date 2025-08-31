@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AJ STUDIOS • Kamesh R | Developer Portfolio</title>
+  <title>Certificates • AJ STUDIOS</title>
   <link rel="icon" href="logo.png">
   <link rel="preload" href="logo.png" as="image">
-  <meta name="description" content="The professional portfolio of Kamesh R, a CSE(AIML) student specializing in web development and UI/UX design." />
+  <meta name="description" content="A showcase of certifications and professional development achievements by Kamesh R (AJ STUDIOS)." />
   
   <!-- FONT AWESOME & GOOGLE FONTS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -310,8 +310,8 @@
       gap: 30px;
     }
     
-    /* Card Styles with RGB Glow */
-    .card {
+    /* Certificate Card Styles with RGB Glow */
+    .cert-card {
       display: block;
       background: var(--card-bg-color);
       border: 1px solid var(--border-color);
@@ -325,7 +325,7 @@
     }
     
     /* RGB Glow Animation */
-    .card {
+    .cert-card {
       animation: rgbGlow 4s infinite alternate;
     }
     
@@ -362,7 +362,7 @@
       }
     }
     
-    .card::before {
+    .cert-card::before {
       content: '';
       position: absolute;
       top: 0;
@@ -375,18 +375,18 @@
       transition: opacity 0.3s;
     }
     
-    .card:hover {
+    .cert-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 30px var(--shadow-color);
       border-color: var(--primary-color);
       color: white;
     }
     
-    .card:hover::before {
+    .cert-card:hover::before {
       opacity: 0.1;
     }
     
-    .card .thumb {
+    .cert-card .thumb {
       display: inline-block;
       padding: 6px 12px;
       border-radius: 20px;
@@ -398,135 +398,69 @@
       transition: color 0.3s, background 0.3s;
     }
     
-    .card:hover .thumb {
+    .cert-card:hover .thumb {
       background: rgba(255, 255, 255, 0.2);
       color: white;
     }
     
-    .card h3 {
+    .cert-card h3 {
       font-size: 1.4rem;
       margin-bottom: 12px;
       font-weight: 700;
       transition: color 0.3s;
     }
     
-    .card:hover h3 {
+    .cert-card:hover h3 {
       color: var(--accent-color);
     }
     
-    .card p {
+    .cert-card p {
       margin-bottom: 16px;
       opacity: 0.8;
       transition: opacity 0.3s;
     }
     
-    .card:hover p {
+    .cert-card:hover p {
       opacity: 1;
     }
     
-    .card .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    
-    .card .tech-tag {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 4px;
-      background: rgba(70, 130, 180, 0.2);
-      color: var(--secondary-color);
-      font-size: 0.75rem;
+    .cert-card .issuer {
       font-weight: 500;
-      transition: background 0.3s, color 0.3s;
-    }
-    
-    .card:hover .tech-tag {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-    }
-    
-    /* Skills Section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    
-    .skill-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      background: var(--card-bg-color);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px 15px;
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    }
-    
-    .skill-item:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 15px 30px var(--shadow-color);
-      border-color: var(--primary-color);
-    }
-    
-    .skill-icon {
-      font-size: 2.5rem;
-      margin-bottom: 12px;
       color: var(--primary-color);
-      transition: transform 0.3s;
+      margin-bottom: 8px;
     }
     
-    .skill-item:hover .skill-icon {
-      transform: scale(1.2) rotate(10deg);
+    .cert-card .cert-date {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      margin-top: 8px;
     }
     
-    .skill-name {
+    .cert-card .view-cert-btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 20px;
+      background: var(--gradient);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
-    }
-    
-    /* Testimonials Section */
-    .testimonials {
-      background: var(--bg-secondary-color);
-      border-radius: 20px;
-      padding: 40px;
-      margin-top: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .testimonials::before {
-      content: '"';
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 8rem;
-      color: rgba(138, 43, 226, 0.1);
-      font-family: Georgia, serif;
-    }
-    
-    .testimonial {
+      transition: transform 0.3s, box-shadow 0.3s;
       text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
     }
     
-    .testimonial-text {
-      font-size: 1.2rem;
-      font-style: italic;
-      margin-bottom: 20px;
-      position: relative;
+    .cert-card .view-cert-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
     
-    .testimonial-author {
-      font-weight: 600;
-      color: var(--secondary-color);
+    /* Certificate Image */
+    .cert-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 16px;
     }
     
     /* Footer Enhancements */
@@ -578,6 +512,63 @@
       transform: translateY(-5px) rotate(15deg);
     }
     
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+    
+    .modal-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, transform 0.3s;
+    }
+    
+    .modal-close:hover {
+      background: rgba(255, 0, 0, 0.7);
+      transform: rotate(90deg);
+    }
+    
     /* Reveal Animation */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -587,7 +578,6 @@
       .navlinks-desktop { display: none; }
       .hamburger-toggle { display: flex; }
       .footer-inner { flex-direction: column; gap: 1.5rem; }
-      .skills-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
       
       /* Adjust mobile menu for smaller screens */
       .navlinks-mobile {
@@ -647,7 +637,7 @@
         font-size: 12pt;
       }
       
-      .card, .skill-item, .testimonials {
+      .cert-card {
         break-inside: avoid;
         border: 1px solid #ddd;
       }
@@ -674,9 +664,9 @@
         <div class="wordmark"><span>AJ STUDIOS</span><small>KAMESH&nbsp;R</small></div>
       </a>
       <div class="navlinks-desktop">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
-        <a href="certificates.html">Certificates</a>
+        <a href="certificates.html" class="active">Certificates</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -697,98 +687,75 @@
     </button>
     
     <!-- Navigation Links -->
-    <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
+    <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
     <a href="projects.html"><i class="fa-solid fa-layer-group"></i>Projects</a>
-    <a href="certificates.html"><i class="fa-solid fa-certificate"></i>Certificates</a>
+    <a href="certificates.html" class="active"><i class="fa-solid fa-certificate"></i>Certificates</a>
     <a href="about.html"><i class="fa-solid fa-user"></i>About</a>
     <a href="contact.html"><i class="fa-solid fa-envelope"></i>Contact</a>
   </div>
   
   <main id="main-content">
     <header class="hero container">
-      <span class="badge reveal">👋 HELLO, WORLD! I'M KAMESH R.</span>
-      <h1 class="reveal">CSE(AIML) Student & Developer</h1>
-      <p class="lead reveal">A 2nd year Computer Science student specializing in AI & Machine Learning, with a passion for web development and UI/UX design.</p>
-      <div class="cta reveal">
-        <a href="#projects" class="btn">View My Projects</a>
-        <a href="about.html" class="btn secondary">Learn More</a>
-      </div>
+      <span class="badge reveal">🏆 MY ACHIEVEMENTS</span>
+      <h1 class="reveal">Professional Certifications</h1>
+      <p class="lead reveal">A collection of my professional credentials, reflecting my commitment to continuous learning and skill development.</p>
     </header>
     
-    <section id="projects" class="container">
-      <h2 class="section-title reveal">Featured Projects</h2>
-      <div class="grid">
-        <a class="card reveal" href="https://cgpa-calc-aj.vercel.app/" target="_blank" rel="noopener">
-          <div class="thumb">Education</div>
-          <h3>GPA & CGPA Calculator</h3>
-          <p>An intuitive tool for students to accurately calculate their Grade Point Averages.</p>
-          <div class="tech-tags">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-          </div>
-        </a>
-        <a class="card reveal" href="https://cgpa-calc-location-fetch.vercel.app/" target="_blank" rel="noopener">
-          <div class="thumb">Geolocation</div>
-          <h3>Location Tracking Website</h3>
-          <p>A web application that demonstrates real-time location fetching using browser APIs.</p>
-          <div class="tech-tags">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">Leaflet.js</span>
-          </div>
-        </a>
-        <a class="card reveal" href="projects.html">
-          <div class="thumb">View All</div>
-          <h3>The Full Collection</h3>
-          <p>Browse the complete archive of my projects, experiments, and contributions.</p>
-          <div class="tech-tags">
-            <span class="tech-tag">Various</span>
-          </div>
-        </a>
-      </div>
-    </section>
-    
-    <section id="skills" class="container">
-      <h2 class="section-title reveal">Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-item reveal">
-          <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
-          <div class="skill-name">HTML5</div>
-        </div>
-        <div class="skill-item reveal">
-          <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
-          <div class="skill-name">CSS3</div>
-        </div>
-        <div class="skill-item reveal">
-          <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
-          <div class="skill-name">JavaScript</div>
-        </div>
-        <div class="skill-item reveal">
-          <div class="skill-icon"><i class="fa-solid fa-fire"></i></div>
-          <div class="skill-name">Firebase</div>
-        </div>
-        <div class="skill-item reveal">
-          <div class="skill-icon"><i class="fa-brands fa-git-alt"></i></div>
-          <div class="skill-name">GitHub</div>
-        </div>
-        <div class="skill-item reveal">
-          <div class="skill-icon"><i class="fa-solid fa-palette"></i></div>
-          <div class="skill-name">UI/UX</div>
-        </div>
-      </div>
-    </section>
-    
     <section class="container">
-      <h2 class="section-title reveal">Testimonials</h2>
-      <div class="testimonials reveal">
-        <div class="testimonial">
-          <p class="testimonial-text">Be impressive, be a secret until you achieve. Success is not just about what you accomplish in your life, it's about what you inspire others to do.</p>
-          <p class="testimonial-author">— Kamesh R</p>
+      <h2 class="section-title reveal">All Certificates</h2>
+      <div class="grid">
+        <div class="cert-card reveal">
+          <img src="https://via.placeholder.com/400x200?text=Python+Certificate" alt="Python Certificate" class="cert-card-img">
+          <div class="thumb">Programming</div>
+          <h3>Basics of Python</h3>
+          <p class="issuer">Infosys Springboard</p>
+          <p>Comprehensive course covering Python fundamentals, data structures, and basic programming concepts.</p>
+          <p class="cert-date">Issued on August 15, 2025</p>
+          <a href="#" class="view-cert-btn" data-cert="python">View Certificate</a>
+        </div>
+        
+        <div class="cert-card reveal">
+          <img src="https://via.placeholder.com/400x200?text=Circular+Economy" alt="Circular Economy Certificate" class="cert-card-img">
+          <div class="thumb">Sustainability</div>
+          <h3>Circular Economy</h3>
+          <p class="issuer">HP LIFE</p>
+          <p>Course on implementing circular economy principles in business for sustainable growth.</p>
+          <p class="cert-date">Issued on August 20, 2025</p>
+          <a href="#" class="view-cert-btn" data-cert="circular">View Certificate</a>
+        </div>
+        
+        <div class="cert-card reveal">
+          <img src="https://via.placeholder.com/400x200?text=Phishing+Attacks" alt="Phishing Attacks Certificate" class="cert-card-img">
+          <div class="thumb">Cybersecurity</div>
+          <h3>Phishing Attacks</h3>
+          <p class="issuer">VOIS (Vodafone Idea Foundation)</p>
+          <p>Training on identifying, preventing, and responding to phishing attacks in organizational settings.</p>
+          <p class="cert-date">Issued on July 17, 2025</p>
+          <a href="#" class="view-cert-btn" data-cert="phishing">View Certificate</a>
+        </div>
+        
+        <div class="cert-card reveal">
+          <img src="https://via.placeholder.com/400x200?text=ISTE+Membership" alt="ISTE Membership Certificate" class="cert-card-img">
+          <div class="thumb">Professional Development</div>
+          <h3>Student Member</h3>
+          <p class="issuer">The Indian Society for Technical Education (ISTE)</p>
+          <p>Membership recognition for involvement and contribution to technical education and professional development.</p>
+          <p class="cert-date">Duration: 2025 - 2029</p>
+          <a href="#" class="view-cert-btn" data-cert="iste">View Certificate</a>
         </div>
       </div>
     </section>
   </main>
+  
+  <!-- Modal for Certificate View -->
+  <div class="modal" id="cert-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img src="" alt="Certificate" class="modal-img" id="modal-img">
+    </div>
+  </div>
   
   <footer>
     <div class="container footer-inner">
@@ -813,6 +780,20 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // CERTIFICATE DATA
+      const certificates = {
+        python: "https://via.placeholder.com/800x600?text=Python+Certificate+Full+View",
+        circular: "https://via.placeholder.com/800x600?text=Circular+Economy+Certificate+Full+View",
+        phishing: "https://via.placeholder.com/800x600?text=Phishing+Attacks+Certificate+Full+View",
+        iste: "https://via.placeholder.com/800x600?text=ISTE+Membership+Certificate+Full+View"
+      };
+      
+      // DOM ELEMENTS
+      const modal = document.getElementById('cert-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalClose = document.getElementById('modal-close');
+      const viewCertBtns = document.querySelectorAll('.view-cert-btn');
+      
       // THEME TOGGLE LOGIC
       const themeToggleButton = document.querySelector('.toggle');
       if(themeToggleButton) {
@@ -910,6 +891,34 @@
         }
       });
       
+      // CERTIFICATE MODAL FUNCTIONALITY
+      viewCertBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const certId = btn.getAttribute('data-cert');
+          if (certificates[certId]) {
+            modalImg.src = certificates[certId];
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+      
+      // Close modal
+      modalClose.addEventListener('click', closeModal);
+      
+      // Close modal when clicking outside
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+      
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
       // YEAR UPDATE
       const yearSpan = document.getElementById('year');
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -953,21 +962,6 @@
       revealElements.forEach((elem, index) => {
         elem.style.transitionDelay = `${index * 100}ms`;
         revealObserver.observe(elem);
-      });
-      
-      // SMOOTH SCROLL FOR ANCHOR LINKS
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            window.scrollTo({
-              top: target.offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        });
       });
     });
   </script>
