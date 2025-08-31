@@ -42,7 +42,12 @@
     [data-theme="light"]::before { display: none; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes aurora { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    body.nav-open { overflow: hidden; }
+    body.nav-open { 
+      overflow: hidden; 
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
     
     /* Progress Bar */
@@ -76,90 +81,136 @@
     .navlinks-desktop a.active { opacity: 1; font-weight: 700; }
     .hamburger-toggle { display: none; }
     
-   /* Mobile Navigation Styles */
-.navlinks-mobile {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  background: rgba(13, 13, 26, 0.95);
-  backdrop-filter: blur(12px);
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  text-align: center;
-  z-index: 1001;
-  opacity: 0;
-  transform: scale(1.1);
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
-  pointer-events: none;
-}
-
-/* Active state for mobile nav */
-.navlinks-mobile.active {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-/* Close Button Styles */
-.close-btn {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1002;
-  transition: transform 0.3s ease;
-}
-
-.close-btn:hover {
-  transform: rotate(90deg);
-}
-
-/* Navigation Links */
-.navlinks-mobile a {
-  color: white;
-  text-decoration: none;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: transform 0.3s ease;
-}
-
-.navlinks-mobile a:hover {
-  transform: translateY(-5px);
-}
-
-.navlinks-mobile a.active {
-  color: #64ffda;
-  font-weight: bold;
-}
-
-/* Hamburger Menu Icon */
-.hamburger-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Body overlay when nav is open */
-body.nav-open {
-  overflow: hidden;
-}
+    /* Mobile Navigation Styles */
+    .navlinks-mobile {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80%;
+      max-width: 320px;
+      height: 100%;
+      flex-direction: column;
+      background: rgba(13, 13, 26, 0.98);
+      backdrop-filter: blur(12px);
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      text-align: center;
+      z-index: 1001;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
+      pointer-events: none;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Active state for mobile nav */
+    .navlinks-mobile.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+    
+    /* Close Button Styles */
+    .close-btn {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 1002;
+      transition: transform 0.3s ease, color 0.3s;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    
+    .close-btn:hover {
+      transform: rotate(90deg);
+      color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Navigation Links */
+    .navlinks-mobile a {
+      color: white;
+      text-decoration: none;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.3s ease, color 0.3s;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: 80%;
+      justify-content: flex-start;
+    }
+    
+    .navlinks-mobile a:hover {
+      transform: translateX(-10px);
+      color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .navlinks-mobile a.active {
+      color: #64ffda;
+      font-weight: bold;
+      background: rgba(100, 255, 218, 0.1);
+    }
+    
+    .navlinks-mobile i {
+      font-size: 24px;
+      width: 30px;
+      text-align: center;
+    }
+    
+    /* Hamburger Menu Icon */
+    .hamburger-toggle {
+      position: relative;
+      z-index: 1002;
+      background: none;
+      border: none;
+      color: var(--font-color);
+      font-size: 24px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    
+    .hamburger-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .hamburger-toggle.active {
+      transform: rotate(90deg);
+    }
+    
+    /* Body overlay when nav is open */
+    body.nav-open::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeIn 0.3s forwards;
+    }
+    
     /* Project Card Enhancements */
     .card .thumb {
       display: inline-block;
@@ -323,9 +374,38 @@ body.nav-open {
     /* Responsive Styles */
     @media (max-width: 850px) {
       .navlinks-desktop { display: none; }
-      .hamburger-toggle { display: block; position: relative; z-index: 1002; }
+      .hamburger-toggle { display: flex; }
       .footer-inner { flex-direction: column; gap: 1.5rem; }
       .skills-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+      
+      /* Adjust mobile menu for smaller screens */
+      .navlinks-mobile {
+        width: 85%;
+      }
+      
+      .navlinks-mobile a {
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .navlinks-mobile {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .navlinks-mobile a {
+        font-size: 18px;
+        width: 90%;
+      }
+      
+      .close-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
     }
     
     /* Print Styles */
@@ -375,25 +455,27 @@ body.nav-open {
       </div>
       <div class="nav-controls">
           <button class="toggle" aria-label="Toggle theme">☀️/🌙</button>
-          <!-- Hamburger Menu Button -->
-<button class="hamburger hamburger-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-mobile">
-  <i class="fa-solid fa-bars"></i>
-</button>   
-
-<!-- Mobile Navigation Menu -->
-<div class="navlinks-mobile" id="navlinks-mobile">
-  <!-- Close Button -->
-  <button class="close-btn" aria-label="Close navigation menu">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
+          <button class="hamburger hamburger-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-mobile">
+            <i class="fa-solid fa-bars"></i>
+          </button>   
+      </div>
+    </div>
+  </nav>
   
-  <!-- Navigation Links -->
-  <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
-  <a href="projects.html"><i class="fa-solid fa-layer-group"></i>Projects</a>
-  <a href="certificates.html"><i class="fa-solid fa-certificate"></i>Certificates</a>
-  <a href="about.html"><i class="fa-solid fa-user"></i>About</a>
-  <a href="contact.html"><i class="fa-solid fa-envelope"></i>Contact</a>
-</div>
+  <!-- Mobile Navigation Menu -->
+  <div class="navlinks-mobile" id="navlinks-mobile">
+    <!-- Close Button -->
+    <button class="close-btn" aria-label="Close navigation menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    
+    <!-- Navigation Links -->
+    <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
+    <a href="projects.html"><i class="fa-solid fa-layer-group"></i>Projects</a>
+    <a href="certificates.html"><i class="fa-solid fa-certificate"></i>Certificates</a>
+    <a href="about.html"><i class="fa-solid fa-user"></i>About</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i>Contact</a>
+  </div>
   
   <main id="main-content">
     <header class="hero container">
@@ -533,47 +615,73 @@ body.nav-open {
         });
       }
       
-     // Mobile Navigation Logic
-const hamburger = document.querySelector('.hamburger-toggle');
-const mobileNav = document.getElementById('navlinks-mobile');
-const hamburgerIcon = hamburger.querySelector('i');
-const closeBtn = document.querySelector('.close-btn');
-
-// Toggle mobile menu
-hamburger.addEventListener('click', () => {
-  const isActive = mobileNav.classList.toggle('active');
-  hamburger.setAttribute('aria-expanded', isActive);
-  document.body.classList.toggle('nav-open', isActive);
-  hamburgerIcon.className = isActive ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-});
-
-// Close mobile menu when close button is clicked
-closeBtn.addEventListener('click', () => {
-  mobileNav.classList.remove('active');
-  document.body.classList.remove('nav-open');
-  hamburgerIcon.className = 'fa-solid fa-bars';
-  hamburger.setAttribute('aria-expanded', 'false');
-});
-
-// Close mobile menu when a link is clicked
-mobileNav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileNav.classList.remove('active');
-    document.body.classList.remove('nav-open');
-    hamburgerIcon.className = 'fa-solid fa-bars';
-    hamburger.setAttribute('aria-expanded', 'false');
-  });
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-  if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
-    mobileNav.classList.remove('active');
-    document.body.classList.remove('nav-open');
-    hamburgerIcon.className = 'fa-solid fa-bars';
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-});
+      // Mobile Navigation Logic
+      const hamburger = document.querySelector('.hamburger-toggle');
+      const mobileNav = document.getElementById('navlinks-mobile');
+      const hamburgerIcon = hamburger.querySelector('i');
+      const closeBtn = document.querySelector('.close-btn');
+      
+      // Store scroll position when opening menu
+      let scrollPosition = 0;
+      
+      // Toggle mobile menu
+      hamburger.addEventListener('click', () => {
+        const isActive = mobileNav.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive);
+        
+        if (isActive) {
+          // Store current scroll position
+          scrollPosition = window.pageYOffset;
+          // Prevent body scroll
+          document.body.classList.add('nav-open');
+          // Change icon to X
+          hamburgerIcon.className = 'fa-solid fa-xmark';
+        } else {
+          // Restore body scroll
+          document.body.classList.remove('nav-open');
+          // Restore scroll position
+          window.scrollTo(0, scrollPosition);
+          // Change icon back to hamburger
+          hamburgerIcon.className = 'fa-solid fa-bars';
+        }
+      });
+      
+      // Close mobile menu when close button is clicked
+      closeBtn.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        hamburger.classList.remove('active');
+        document.body.classList.remove('nav-open');
+        window.scrollTo(0, scrollPosition);
+        hamburgerIcon.className = 'fa-solid fa-bars';
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+      
+      // Close mobile menu when a link is clicked
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('active');
+          hamburger.classList.remove('active');
+          document.body.classList.remove('nav-open');
+          window.scrollTo(0, scrollPosition);
+          hamburgerIcon.className = 'fa-solid fa-bars';
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+      
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (mobileNav.classList.contains('active') && 
+            !mobileNav.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+          mobileNav.classList.remove('active');
+          hamburger.classList.remove('active');
+          document.body.classList.remove('nav-open');
+          window.scrollTo(0, scrollPosition);
+          hamburgerIcon.className = 'fa-solid fa-bars';
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
       
       // YEAR UPDATE
       const yearSpan = document.getElementById('year');
