@@ -20,26 +20,39 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
     
     :root {
-      --bg-color: #111111; --bg-secondary-color: #1c1c1c; --font-color: #e5e5e5;
-      --primary-color: #8A2BE2; --secondary-color: #4682B4; --card-bg-color: #181818;
+      --bg-color: #0d0d1a; --bg-secondary-color: #1c1c2b; --font-color: #e5e5e5;
+      --primary-color: #8A2BE2; --secondary-color: #4682B4; --card-bg-color: rgba(24, 24, 38, 0.6);
       --shadow-color: rgba(0, 0, 0, 0.4); --border-color: rgba(255, 255, 255, 0.1);
       --nav-height: 70px; --error-color: #ff4d4d; --success-color: #4caf50;
+      --accent-color: #64ffda; --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     }
     [data-theme="light"] {
       --bg-color: #f5f5f7; --bg-secondary-color: #ffffff; --font-color: #1d1d1f;
-      --primary-color: #7A28C2; --secondary-color: #007AFF; --card-bg-color: #ffffff;
+      --primary-color: #7A28C2; --secondary-color: #007AFF; --card-bg-color: rgba(255, 255, 255, 0.6);
       --shadow-color: rgba(0, 0, 0, 0.05); --border-color: rgba(0, 0, 0, 0.1);
-    }
-    [data-theme="light"] .navlinks {
-      background: rgba(245, 245, 247, 0.95);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color); color: var(--font-color);
       transition: background-color 0.3s, color 0.3s; line-height: 1.7; font-size: 16px;
-      overflow-x: hidden;
+      overflow-x: hidden; position: relative;
+    }
+    body::before {
+        content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background: radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15), transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(70, 130, 180, 0.15), transparent 40%);
+        animation: aurora 20s infinite linear;
+    }
+    [data-theme="light"]::before { display: none; }
+    @keyframes aurora { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    body.nav-open { 
+      overflow: hidden; 
+      position: fixed;
+      width: 100%;
+      height: 100%;
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
     .skip-to-content {
@@ -59,56 +72,165 @@
       left: 0;
       height: 3px;
       width: 0;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      background: var(--gradient);
       z-index: 10000;
       transition: width 0.2s;
     }
     
-    .navbar {
-      position: sticky; top: 0; left: 0; width: 100%;
-      background: rgba(17, 17, 17, 0.8); backdrop-filter: blur(12px);
-      z-index: 1000; height: var(--nav-height); border-bottom: 1px solid var(--border-color);
-    }
-    [data-theme="light"] .navbar { background: rgba(245, 245, 247, 0.8); }
+    /* === NAVBAR STRUCTURE === */
+    .navbar { position: sticky; top: 0; left: 0; width: 100%; background: rgba(13, 13, 26, 0.7); backdrop-filter: blur(12px); z-index: 1000; height: var(--nav-height); border-bottom: 1px solid var(--border-color); }
+    [data-theme="light"] .navbar { background: rgba(245, 245, 247, 0.7); }
     .navbar-inner { display: flex; justify-content: space-between; align-items: center; height: 100%; }
     .brand { display: flex; align-items: center; text-decoration: none; color: var(--font-color); }
-    .brand img { height: 40px; width: 40px; margin-right: 12px; object-fit: contain; border-radius: 8px; }
+    .brand img { height: 40px; width: 40px; margin-right: 12px; border-radius: 8px; }
     .wordmark span { font-weight: 700; font-size: 1.2rem; }
     .wordmark small { display: block; font-size: 0.7rem; opacity: 0.6; }
-    .navlinks { display: flex; align-items: center; gap: 25px; }
-    .navlinks a {
-      color: var(--font-color); text-decoration: none; font-weight: 500; font-size: 0.95rem;
-      padding: 8px 4px; position: relative; transition: opacity 0.3s; opacity: 0.8;
+    .nav-controls { display: flex; align-items: center; gap: 1rem; }
+    
+    /* DESKTOP NAV */
+    .navlinks-desktop { display: flex; align-items: center; gap: 25px; }
+    .navlinks-desktop a { color: var(--font-color); text-decoration: none; font-weight: 500; font-size: 0.95rem; padding: 8px 4px; position: relative; transition: opacity 0.3s; opacity: 0.8; }
+    .navlinks-desktop a:hover { opacity: 1; }
+    .navlinks-desktop a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--gradient); transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+    .navlinks-desktop a:hover::after, .navlinks-desktop a.active::after { transform: scaleX(1); transform-origin: left; }
+    .navlinks-desktop a.active { opacity: 1; font-weight: 700; }
+    .hamburger-toggle { display: none; }
+    
+    /* Mobile Navigation Styles */
+    .navlinks-mobile {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80%;
+      max-width: 320px;
+      height: 100%;
+      flex-direction: column;
+      background: rgba(13, 13, 26, 0.98);
+      backdrop-filter: blur(12px);
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      text-align: center;
+      z-index: 1001;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
+      pointer-events: none;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     }
-    .navlinks a:hover { opacity: 1; }
-    .navlinks a::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      transform: scaleX(0); transform-origin: right;
-      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    
+    /* Active state for mobile nav */
+    .navlinks-mobile.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
     }
-    .navlinks a:hover::after, .navlinks a.active::after { transform: scaleX(1); transform-origin: left; }
-    .navlinks a.active { opacity: 1; font-weight: 700; }
+    
+    /* Close Button Styles */
+    .close-btn {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 1002;
+      transition: transform 0.3s ease, color 0.3s;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    
+    .close-btn:hover {
+      transform: rotate(90deg);
+      color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Navigation Links */
+    .navlinks-mobile a {
+      color: white;
+      text-decoration: none;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.3s ease, color 0.3s;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: 80%;
+      justify-content: flex-start;
+    }
+    
+    .navlinks-mobile a:hover {
+      transform: translateX(-10px);
+      color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .navlinks-mobile a.active {
+      color: var(--accent-color);
+      font-weight: bold;
+      background: rgba(100, 255, 218, 0.1);
+    }
+    
+    .navlinks-mobile i {
+      font-size: 24px;
+      width: 30px;
+      text-align: center;
+    }
+    
+    /* Hamburger Menu Icon */
+    .hamburger-toggle {
+      position: relative;
+      z-index: 1002;
+      background: none;
+      border: none;
+      color: var(--font-color);
+      font-size: 24px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    
+    .hamburger-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .hamburger-toggle.active {
+      transform: rotate(90deg);
+    }
+    
     .toggle {
       background: var(--bg-secondary-color); border: 1px solid var(--border-color); border-radius: 50px;
       cursor: pointer; font-size: 1rem; padding: 8px; display: flex; align-items: center; justify-content: center;
       transition: transform 0.2s, box-shadow 0.3s;
     }
     .toggle:hover { transform: scale(1.1); box-shadow: 0 0 12px var(--primary-color); }
-    .hamburger { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; color: var(--font-color); }
     
     .hero { text-align: center; padding: 100px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .hero h1 {
       font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem);
       margin-bottom: 1rem; font-weight: 800;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      background: var(--gradient);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       letter-spacing: -1px;
     }
     .lead { font-size: 1.25rem; max-width: 650px; margin-bottom: 2.5rem; opacity: 0.7; }
     .btn {
       padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); color: white;
+      background: var(--gradient); color: white;
       transition: transform 0.3s, box-shadow 0.3s; border: none; font-size: 1rem; cursor: pointer;
       position: relative; overflow: hidden;
     }
@@ -173,11 +295,52 @@
       border-radius: 16px;
       padding: 30px;
       border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
     }
+    
+    /* RGB Glow Animation */
+    .contact-info {
+      animation: rgbGlow 4s infinite alternate;
+    }
+    
+    @keyframes rgbGlow {
+      0% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7),
+                    0 0 25px rgba(255, 0, 0, 0.5),
+                    0 0 35px rgba(255, 0, 0, 0.3);
+        border-color: rgba(255, 0, 0, 0.5);
+      }
+      25% {
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.7),
+                    0 0 25px rgba(0, 255, 0, 0.5),
+                    0 0 35px rgba(0, 255, 0, 0.3);
+        border-color: rgba(0, 255, 0, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 15px rgba(0, 0, 255, 0.7),
+                    0 0 25px rgba(0, 0, 255, 0.5),
+                    0 0 35px rgba(0, 0, 255, 0.3);
+        border-color: rgba(0, 0, 255, 0.5);
+      }
+      75% {
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.7),
+                    0 0 25px rgba(255, 255, 0, 0.5),
+                    0 0 35px rgba(255, 255, 0, 0.3);
+        border-color: rgba(255, 255, 0, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.7),
+                    0 0 25px rgba(255, 0, 255, 0.5),
+                    0 0 35px rgba(255, 0, 255, 0.3);
+        border-color: rgba(255, 0, 255, 0.5);
+      }
+    }
+    
     .contact-info h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      background: var(--gradient);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .info-item {
@@ -254,44 +417,25 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
     
     /* Responsive Breakpoints */
+    @media (max-width: 850px) {
+      .navlinks-desktop { display: none; }
+      .hamburger-toggle { display: flex; }
+      .footer-inner { flex-direction: column; gap: 1.5rem; }
+      
+      /* Adjust mobile menu for smaller screens */
+      .navlinks-mobile {
+        width: 85%;
+      }
+      
+      .navlinks-mobile a {
+        font-size: 20px;
+      }
+    }
+    
     @media (max-width: 768px) {
       body { font-size: 15px; }
       .lead { font-size: 1.1rem; }
       section { padding: 50px 0; }
-      body.nav-open { overflow: hidden; }
-      
-      .navlinks {
-        display: flex;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-        background: rgba(17, 17, 17, 0.95);
-        backdrop-filter: blur(12px);
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        text-align: center;
-        z-index: 1001;
-        
-        opacity: 0;
-        transform: scale(1.1);
-        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
-        pointer-events: none;
-      }
-      .navlinks.active {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: auto;
-      }
-      .hamburger {
-        display: block;
-        position: relative; /* CRITICAL FIX: Ensures z-index works */
-        z-index: 1002;
-      }
-      .footer-inner { flex-direction: column; gap: 1.5rem; }
       
       /* Contact Layout Mobile */
       .contact-container {
@@ -300,9 +444,29 @@
       }
     }
     
+    @media (max-width: 480px) {
+      .navlinks-mobile {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .navlinks-mobile a {
+        font-size: 18px;
+        width: 90%;
+      }
+      
+      .close-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
+    }
+    
     /* Print Styles */
     @media print {
-      .navbar, .hamburger, .toggle, .progress-bar, .toast {
+      .navbar, .hamburger-toggle, .toggle, .progress-bar, .toast {
         display: none !important;
       }
       
@@ -328,17 +492,37 @@
         <img src="logo.png" alt="AJ STUDIOS Logo" loading="lazy" onerror="this.style.display='none'">
         <div class="wordmark"><span>AJ STUDIOS</span><small>KAMESH&nbsp;R</small></div>
       </a>
-      <div class="navlinks" id="navlinks-menu">
+      <div class="navlinks-desktop">
         <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
         <a href="certificates.html">Certificates</a>
         <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="active">Contact</a>
       </div>
-      <button class="toggle" aria-label="Toggle theme">☀️/🌙</button>
-      <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-menu">&#9776;</button>
+      <div class="nav-controls">
+        <button class="toggle" aria-label="Toggle theme">☀️/🌙</button>
+        <button class="hamburger hamburger-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks-mobile">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
   </nav>
+  
+  <!-- Mobile Navigation Menu -->
+  <div class="navlinks-mobile" id="navlinks-mobile">
+    <!-- Close Button -->
+    <button class="close-btn" aria-label="Close navigation menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    
+    <!-- Navigation Links -->
+    <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+    <a href="projects.html"><i class="fa-solid fa-layer-group"></i>Projects</a>
+    <a href="certificates.html"><i class="fa-solid fa-certificate"></i>Certificates</a>
+    <a href="about.html"><i class="fa-solid fa-user"></i>About</a>
+    <a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i>Contact</a>
+  </div>
+  
   <main id="main-content">
     <section class="container hero">
       <h1 class="reveal">Let's Build Something Together</h1>
@@ -348,7 +532,7 @@
     <section class="container">
       <div class="contact-container">
         <div class="contact-form reveal">
-          <form id="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_FORM_ID" method="POST">
+          <form id="contact-form" action="https://formspree.io/f/xqazvplw" method="POST">
             <div class="form-group">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" required placeholder="What should I call you?">
@@ -457,31 +641,71 @@
       });
       
       // Mobile Navigation
-      const hamburger = document.querySelector('.hamburger');
-      const navlinks = document.querySelector('.navlinks');
+      const hamburger = document.querySelector('.hamburger-toggle');
+      const mobileNav = document.getElementById('navlinks-mobile');
+      const hamburgerIcon = hamburger.querySelector('i');
+      const closeBtn = document.querySelector('.close-btn');
       
+      // Store scroll position when opening menu
+      let scrollPosition = 0;
+      
+      // Toggle mobile menu
       hamburger.addEventListener('click', () => {
-        const isActive = navlinks.classList.toggle('active');
+        const isActive = mobileNav.classList.toggle('active');
+        hamburger.classList.toggle('active');
         hamburger.setAttribute('aria-expanded', isActive);
-        hamburger.innerHTML = isActive ? '&times;' : '&#9776;';
-        document.body.classList.toggle('nav-open', isActive);
+        
+        if (isActive) {
+          // Store current scroll position
+          scrollPosition = window.pageYOffset;
+          // Prevent body scroll
+          document.body.classList.add('nav-open');
+          // Change icon to X
+          hamburgerIcon.className = 'fa-solid fa-xmark';
+        } else {
+          // Restore body scroll
+          document.body.classList.remove('nav-open');
+          // Restore scroll position
+          window.scrollTo(0, scrollPosition);
+          // Change icon back to hamburger
+          hamburgerIcon.className = 'fa-solid fa-bars';
+        }
       });
       
-      navlinks.querySelectorAll('a').forEach(link => {
+      // Close mobile menu when close button is clicked
+      closeBtn.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        hamburger.classList.remove('active');
+        document.body.classList.remove('nav-open');
+        window.scrollTo(0, scrollPosition);
+        hamburgerIcon.className = 'fa-solid fa-bars';
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+      
+      // Close mobile menu when a link is clicked
+      mobileNav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            navlinks.classList.remove('active');
-            document.body.classList.remove('nav-open');
-            hamburger.innerHTML = '&#9776;';
-            hamburger.setAttribute('aria-expanded', 'false');
+          mobileNav.classList.remove('active');
+          hamburger.classList.remove('active');
+          document.body.classList.remove('nav-open');
+          window.scrollTo(0, scrollPosition);
+          hamburgerIcon.className = 'fa-solid fa-bars';
+          hamburger.setAttribute('aria-expanded', 'false');
         });
       });
       
-      // Active Navigation Link
-      const navLinks = document.querySelectorAll('.navlinks a');
-      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-      navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href').split('/').pop() || 'index.html';
-        if (linkPath === currentPath) link.classList.add('active');
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (mobileNav.classList.contains('active') && 
+            !mobileNav.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+          mobileNav.classList.remove('active');
+          hamburger.classList.remove('active');
+          document.body.classList.remove('nav-open');
+          window.scrollTo(0, scrollPosition);
+          hamburgerIcon.className = 'fa-solid fa-bars';
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
       });
       
       // Year Update
@@ -562,7 +786,7 @@
         btnText.textContent = 'Sending...';
         
         try {
-          // Using Formspree or any other form service
+          // Using Formspree
           const response = await fetch(form.action, {
             method: 'POST',
             body: new FormData(form),
