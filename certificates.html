@@ -24,11 +24,10 @@
       --font-color: #e5e5e5;
       --primary-color: #8A2BE2; 
       --secondary-color: #4682B4; 
-      --card-bg-color: rgba(24, 24, 38, 0.6);
-      --shadow-color: rgba(0, 0, 0, 0.4); 
+      --card-bg-color: rgba(24, 24, 38, 0.7);
+      --shadow-color: rgba(0, 0, 0, 0.2); 
       --border-color: rgba(255, 255, 255, 0.1);
       --nav-height: 70px; 
-      --glow-color: rgba(138, 43, 226, 0.5);
       --accent-color: #64ffda;
       --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     }
@@ -39,10 +38,9 @@
       --font-color: #1d1d1f;
       --primary-color: #7A28C2; 
       --secondary-color: #007AFF; 
-      --card-bg-color: rgba(255, 255, 255, 0.6);
-      --shadow-color: rgba(0, 0, 0, 0.05); 
-      --border-color: rgba(0, 0, 0, 0.1); 
-      --glow-color: rgba(122, 40, 194, 0.4);
+      --card-bg-color: rgba(255, 255, 255, 0.8);
+      --shadow-color: rgba(0, 0, 0, 0.08); 
+      --border-color: rgba(0, 0, 0, 0.08); 
     }
     
     * { 
@@ -69,8 +67,8 @@
     
     body::before {
         content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        background: radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15), transparent 40%),
-                    radial-gradient(circle at 80% 70%, rgba(70, 130, 180, 0.15), transparent 40%);
+        background: radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.08), transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(70, 130, 180, 0.08), transparent 40%);
         animation: aurora 20s infinite linear;
     }
     [data-theme="light"]::before { display: none; }
@@ -140,7 +138,7 @@
       top: 0; 
       left: 0; 
       width: 100%;
-      background: rgba(13, 13, 26, 0.7); 
+      background: rgba(13, 13, 26, 0.8); 
       backdrop-filter: blur(12px); 
       z-index: 1000; 
       height: var(--nav-height); 
@@ -148,7 +146,7 @@
     }
     
     [data-theme="light"] .navbar { 
-      background: rgba(245, 245, 247, 0.7); 
+      background: rgba(245, 245, 247, 0.8); 
     }
     
     .navbar-inner { 
@@ -380,7 +378,7 @@
     .badge {
       display: inline-block;
       padding: 8px 16px;
-      background: rgba(138, 43, 226, 0.2);
+      background: rgba(138, 43, 226, 0.15);
       color: var(--primary-color);
       border-radius: 30px;
       font-weight: 600;
@@ -469,7 +467,7 @@
       padding: 8px 20px;
       font-size: 0.9rem;
       font-weight: 500;
-      color: var(--font-color); /* Fixed text color */
+      color: var(--font-color);
       cursor: pointer;
       transition: all 0.3s;
       position: relative;
@@ -516,11 +514,11 @@
       gap: 2rem; 
     }
     
-    /* Certificate Card Styles with RGB Glow */
+    /* Professional Certificate Card Styles */
     .cert-card {
       background: var(--card-bg-color); 
       border-radius: 16px;
-      box-shadow: 0 4px 15px var(--shadow-color); 
+      box-shadow: 0 4px 20px var(--shadow-color); 
       text-decoration: none;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
       color: var(--font-color);
@@ -528,49 +526,11 @@
       overflow: hidden; 
       display: flex; 
       flex-direction: column;
-      backdrop-filter: blur(5px); 
-      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(8px); 
+      -webkit-backdrop-filter: blur(8px);
       position: relative;
       opacity: 0;
       transform: translateY(30px);
-    }
-    
-    /* RGB Glow Animation */
-    .cert-card {
-      animation: rgbGlow 4s infinite alternate;
-    }
-    
-    @keyframes rgbGlow {
-      0% {
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7),
-                    0 0 25px rgba(255, 0, 0, 0.5),
-                    0 0 35px rgba(255, 0, 0, 0.3);
-        border-color: rgba(255, 0, 0, 0.5);
-      }
-      25% {
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.7),
-                    0 0 25px rgba(0, 255, 0, 0.5),
-                    0 0 35px rgba(0, 255, 0, 0.3);
-        border-color: rgba(0, 255, 0, 0.5);
-      }
-      50% {
-        box-shadow: 0 0 15px rgba(0, 0, 255, 0.7),
-                    0 0 25px rgba(0, 0, 255, 0.5),
-                    0 0 35px rgba(0, 0, 255, 0.3);
-        border-color: rgba(0, 0, 255, 0.5);
-      }
-      75% {
-        box-shadow: 0 0 15px rgba(255, 255, 0, 0.7),
-                    0 0 25px rgba(255, 255, 0, 0.5),
-                    0 0 35px rgba(255, 255, 0, 0.3);
-        border-color: rgba(255, 255, 0, 0.5);
-      }
-      100% {
-        box-shadow: 0 0 15px rgba(255, 0, 255, 0.7),
-                    0 0 25px rgba(255, 0, 255, 0.5),
-                    0 0 35px rgba(255, 0, 255, 0.3);
-        border-color: rgba(255, 0, 255, 0.5);
-      }
     }
     
     .cert-card::before {
@@ -579,7 +539,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 5px;
+      height: 4px;
       background: var(--gradient);
       transform: scaleX(0);
       transform-origin: left;
@@ -591,8 +551,8 @@
     }
     
     .cert-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 25px var(--glow-color), 0 10px 20px var(--shadow-color);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     }
     
     .cert-card-img-container {
@@ -609,7 +569,7 @@
         width: 100%; 
         height: 100%; 
         object-fit: cover;
-        transition: transform 0.4s ease;
+        transition: transform 0.5s ease;
     }
     
     .cert-card:hover .cert-card-img { 
@@ -624,10 +584,16 @@
     }
     
     .cert-card h3 { 
-      margin-bottom: 8px; 
+      margin-bottom: 12px; 
       font-size: 1.4rem; 
       font-weight: 700; 
       line-height: 1.3; 
+      color: var(--font-color);
+      transition: color 0.3s;
+    }
+    
+    .cert-card:hover h3 {
+      color: var(--primary-color);
     }
     
     .cert-card p { 
@@ -636,20 +602,21 @@
     }
     
     .cert-card .issuer { 
-      font-weight: 500; 
+      font-weight: 600; 
       color: var(--primary-color);
       font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
     }
     
     .cert-card .cert-date { 
       font-size: 0.85rem; 
       opacity: 0.6; 
-      margin-top: 1rem; 
+      margin-top: auto; 
+      padding-top: 16px;
     }
     
     .cert-card-footer { 
-      margin-top: auto; 
-      padding-top: 1.5rem; 
+      margin-top: 1rem; 
     }
     
     .view-cert-btn {
@@ -668,7 +635,7 @@
     }
     
     .view-cert-btn:hover { 
-      transform: scale(1.03); 
+      transform: translateY(-2px); 
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
     }
     
@@ -704,6 +671,7 @@
         transition: transform 0.3s;
         border-radius: 16px;
         overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     }
     
     .modal.active .modal-content { 
@@ -717,6 +685,7 @@
         max-height: 100%;
         object-fit: contain; 
         border-radius: 8px;
+        transition: transform 0.3s;
     }
     
     .modal-close {
@@ -1048,7 +1017,7 @@
       
       <!-- FILTER BUTTONS -->
       <div class="filter-container reveal">
-        <button class="filter-btn " data-filter="all">All Certificates</button>
+        <button class="filter-btn active" data-filter="all">All Certificates</button>
         <button class="filter-btn" data-filter="Infosys Springboard">Infosys</button>
         <button class="filter-btn" data-filter="HP LIFE">HP</button>
         <button class="filter-btn" data-filter="VOIS">VOIS</button>
@@ -1120,7 +1089,7 @@
           title: "Basics of Python",
           issuer: "Infosys Springboard",
           date: "Issued on August 15, 2025",
-          image: "https://via.placeholder.com/800x600?text=Python+Certificate+Full+View",
+          image: "https://via.placeholder.com/800x600?text=Python+Certificate",
           skills: ["Python", "Programming", "Development"],
           description: "Comprehensive course covering Python fundamentals, data structures, and basic programming concepts."
         },
@@ -1128,7 +1097,7 @@
           title: "Circular Economy",
           issuer: "HP LIFE",
           date: "Issued on August 20, 2025",
-          image: "https://via.placeholder.com/800x600?text=Circular+Economy+Certificate+Full+View",
+          image: "https://via.placeholder.com/800x600?text=Circular+Economy+Certificate",
           skills: ["Sustainability", "Business", "Economics"],
           description: "Course on implementing circular economy principles in business for sustainable growth."
         },
@@ -1136,7 +1105,7 @@
           title: "Phishing Attacks",
           issuer: "VOIS (Vodafone Idea Foundation)",
           date: "Issued on July 17, 2025",
-          image: "vois-phishing.jpg/800x600?text=Phishing+Attacks+Certificate+Full+View",
+          image: "https://via.placeholder.com/800x600?text=Phishing+Attacks+Certificate",
           skills: ["Cybersecurity", "Phishing", "Security Awareness"],
           description: "Training on identifying, preventing, and responding to phishing attacks in organizational settings."
         },
@@ -1144,7 +1113,7 @@
           title: "Student Member",
           issuer: "The Indian Society for Technical Education (ISTE)",
           date: "Duration: 2025 - 2029",
-          image: "https://via.placeholder.com/800x600?text=ISTE+Membership+Certificate+Full+View",
+          image: "https://via.placeholder.com/800x600?text=ISTE+Membership+Certificate",
           skills: ["Professional Development", "Networking", "Technical Education"],
           description: "Membership recognition for involvement and contribution to technical education and professional development."
         }
@@ -1194,7 +1163,8 @@
           card.className = "cert-card reveal";
           card.innerHTML = `
             <div class="cert-card-img-container">
-                <img src="${cert.image}" alt="${cert.title} Certificate Thumbnail" class="cert-card-img" loading="lazy">
+                <img src="${cert.image}" alt="${cert.title} Certificate Thumbnail" class="cert-card-img" loading="lazy" 
+                     onerror="this.src='https://via.placeholder.com/800x600?text=Image+Not+Available'">
             </div>
             <div class="cert-card-content">
                 <h3>${cert.title}</h3>
