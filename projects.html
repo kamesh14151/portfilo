@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects • AJ STUDIOS</title>
-  <link rel="icon" href="logo.png">
+  <!-- 使用提供的favicon -->
+  <link rel="icon" href="https://z-cdn-media.chatglm.cn/files/c0ab345c-b804-44d5-a390-e18e94ff753c_favicon.png?auth_key=1790606480-62e181f711804f07b11aefa03c5b2435-0-3b460c3eaa9cd2e7b488a3438a0c1548">
+  <link rel="apple-touch-icon" href="https://z-cdn-media.chatglm.cn/files/c0ab345c-b804-44d5-a390-e18e94ff753c_favicon.png?auth_key=1790606480-62e181f711804f07b11aefa03c5b2435-0-3b460c3eaa9cd2e7b488a3438a0c1548">
   <meta name="description" content="Explore a collection of web projects by Kamesh R (AJ STUDIOS), from educational tools to real-time applications." />
   <meta property="og:title" content="Projects • AJ STUDIOS" />
   <meta property="og:description" content="A collection of web projects by Kamesh R (AJ STUDIOS)." />
@@ -20,6 +22,7 @@
       --primary-color: #8A2BE2; --secondary-color: #4682B4; --card-bg-color: rgba(24, 24, 38, 0.6);
       --shadow-color: rgba(0, 0, 0, 0.4); --border-color: rgba(255, 255, 255, 0.1); --nav-height: 70px;
       --accent-color: #64ffda; --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      --transition-speed: 0.3s;
     }
     [data-theme="light"] {
       --bg-color: #f5f5f7; --bg-secondary-color: #ffffff; --font-color: #1d1d1f;
@@ -783,7 +786,8 @@
   <nav class="navbar">
     <div class="container navbar-inner">
       <a href="index.html" class="brand">
-        <img src="logo.png" alt="AJ STUDIOS Logo" loading="lazy" onerror="this.style.display='none'">
+        <!-- 使用favicon作为logo -->
+        <img src="https://z-cdn-media.chatglm.cn/files/c0ab345c-b804-44d5-a390-e18e94ff753c_favicon.png?auth_key=1790606480-62e181f711804f07b11aefa03c5b2435-0-3b460c3eaa9cd2e7b488a3438a0c1548" alt="AJ STUDIOS Logo" loading="lazy" onerror="this.style.display='none'">
         <div class="wordmark"><span>AJ STUDIOS</span><small>KAMESH&nbsp;R</small></div>
       </a>
       <div class="navlinks-desktop">
@@ -1070,7 +1074,7 @@
             <div class="tech-tags">
               ${project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
             </div>
-            <a href="#" class="view-project" data-index="${PROJECTS.indexOf(project)}">
+            <a href="${project.link}" target="_blank" rel="noopener" class="view-project" data-index="${PROJECTS.indexOf(project)}">
               View Project <i class="fa-solid fa-arrow-right"></i>
             </a>
           `;
@@ -1084,9 +1088,22 @@
         // Add event listeners to view project buttons
         document.querySelectorAll('.view-project').forEach(btn => {
           btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const index = parseInt(btn.getAttribute('data-index'));
-            openProjectModal(index);
+            e.stopPropagation(); // 阻止事件冒泡，防止触发卡片的点击事件
+            // 直接跳转到项目链接，不需要打开模态框
+            const link = btn.getAttribute('href');
+            window.open(link, '_blank', 'noopener');
+          });
+        });
+        
+        // 添加项目卡片点击事件（用于打开模态框）
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+          card.addEventListener('click', (e) => {
+            // 如果点击的是按钮或者按钮内的元素，则不触发模态框
+            if (e.target.closest('.view-project')) {
+              return;
+            }
+            // 否则，打开模态框
+            openProjectModal(PROJECTS.indexOf(projectsToRender[index]));
           });
         });
       }
