@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Certificates • AJ STUDIOS</title>
-  <link rel="icon" href="logo.png">
+  <link rel="icon" href="https://z-cdn-media.chatglm.cn/files/7c553cf5-df91-4616-ae32-531da1c61bbb_favicon.png?auth_key=1790604194-19038b1c05b04362979e6798c95a1273-0-47cb9c76c3fedec695a409b152af585c">
   <meta name="description" content="A showcase of certifications and professional development achievements by Kamesh R (AJ STUDIOS)." />
   <meta property="og:title" content="Certificates • AJ STUDIOS" />
   <meta property="og:description" content="Explore the certifications earned by Kamesh R." />
@@ -167,7 +167,9 @@
       height: 40px; 
       width: 40px; 
       margin-right: 12px; 
-      border-radius: 8px;
+      border-radius: 50%;
+      background-color: white;
+      padding: 5px;
     }
     
     .wordmark span { 
@@ -967,7 +969,7 @@
   <nav class="navbar">
     <div class="container navbar-inner">
       <a href="index.html" class="brand">
-        <img src="logo.png" alt="AJ STUDIOS Logo" loading="lazy" onerror="this.style.display='none'">
+        <img src="https://z-cdn-media.chatglm.cn/files/7c553cf5-df91-4616-ae32-531da1c61bbb_favicon.png?auth_key=1790604194-19038b1c05b04362979e6798c95a1273-0-47cb9c76c3fedec695a409b152af585c" alt="AJ STUDIOS Logo" loading="lazy" onerror="this.style.display='none'">
         <div class="wordmark"><span>AJ STUDIOS</span><small>KAMESH&nbsp;R</small></div>
       </a>
       <div class="navlinks-desktop">
@@ -1022,6 +1024,7 @@
         <button class="filter-btn" data-filter="HP LIFE">HP</button>
         <button class="filter-btn" data-filter="VOIS">VOIS</button>
         <button class="filter-btn" data-filter="ISTE">ISTE</button>
+        <button class="filter-btn" data-filter="NPTEL">NPTEL</button>
       </div>
     </section>
     
@@ -1116,6 +1119,16 @@
           image: "iste-membership.jpg",
           skills: ["Professional Development", "Networking", "Technical Education"],
           description: "Membership recognition for involvement and contribution to technical education and professional development."
+        },
+        {
+          title: "Design Thinking - A Primer",
+          issuer: "NPTEL (IIT Madras)",
+          date: "Jul - Aug 2025",
+          image: "https://z-cdn-media.chatglm.cn/files/4500d43b-42f3-46fb-9da6-6c3e04812bce_pasted_image_1759067963476.jpg?auth_key=1790604194-33d3852204b141d1bf8e6e72aa902d3a-0-7d8d15d65017247704b8e6c08a5b0e67",
+          skills: ["Design Thinking", "Innovation", "Problem Solving"],
+          description: "A comprehensive course on Design Thinking principles and methodologies, covering the fundamentals of human-centered design and innovation.",
+          score: "56%",
+          details: "Online Assignments: 21.25/25, Proctored Exam: 34.88/75"
         }
       ];
       
@@ -1161,6 +1174,13 @@
         certsToRender.forEach((cert, index) => {
           const card = document.createElement('div');
           card.className = "cert-card reveal";
+          
+          // Add score information if available
+          let scoreInfo = '';
+          if (cert.score) {
+            scoreInfo = `<p><strong>Score:</strong> ${cert.score}</p>`;
+          }
+          
           card.innerHTML = `
             <div class="cert-card-img-container">
                 <img src="${cert.image}" alt="${cert.title} Certificate Thumbnail" class="cert-card-img" loading="lazy" 
@@ -1169,6 +1189,7 @@
             <div class="cert-card-content">
                 <h3>${cert.title}</h3>
                 <p>Issued by <span class="issuer">${cert.issuer}</span></p>
+                ${scoreInfo}
                 <div class="cert-card-footer">
                     <p class="cert-date">${cert.date}</p>
                     <button class="view-cert-btn" data-index="${index}">View Certificate</button>
